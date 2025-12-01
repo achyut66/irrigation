@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import StickyLayout from "./components/StickeyLayout";
-
-// ⬇️ add this
 import { LanguageProvider } from "./context/LanguageContext";
+import StickyLayoutGuard from "./components/StickyLayoutGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +30,7 @@ export default function RootLayout({
 
         {/* ⬇️ GLOBAL LANGUAGE PROVIDER WRAPS THE ENTIRE APP */}
         <LanguageProvider>
-          <StickyLayout />
+          <StickyLayoutGuard />
           {children}
         </LanguageProvider>
 

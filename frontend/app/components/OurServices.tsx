@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 
 const servicesData = [
   {
@@ -34,84 +35,77 @@ const servicesData = [
   },
 ];
 
-const teamData = [
-  {
-    name: "Mitra Baral",
-    position: "Director General",
-    phone: "०१-५४३७१३६",
-    email: "director_general@dwri.gov.np",
-    img: "https://giwmscdnone.gov.np/media/albums/DG_photo_vyDrMRf6SR_m3sqvza.jpg",
-  },
-  {
-    name: "Ram Prasad Paudel",
-    position: "Under Secretary (Information Officer)",
-    phone: "०१-५४३७३०८, ९८५१२३६४०४",
-    email: "administration@dwri.gov.np",
-    img: "https://giwmscdnone.gov.np/media/albums/20250421094538_Xm9m5rYcVN_12p10qe.jpg",
-  },
-];
-
 export default function ServicesAndTeam() {
+  const [teamData, setTeamData] = useState<any[]>([]);
+
+  const API_URL =
+    process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+
+  // Fetch personnel data
+  useEffect(() => {
+    fetch(`${API_URL}/api/authority`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status && Array.isArray(data.data)) {
+          setTeamData(data.data);
+        }
+      })
+      .catch((err) => console.error("Authority fetch error:", err));
+  }, [API_URL]);
+
   return (
     <div className="w-full py-10">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-12 gap-8">
 
         {/* LEFT SIDE */}
         <div className="md:col-span-8">
-
-          {/* TITLE WITH THICK UNDERLINE */}
           <div className="mb-6">
             <h4 className="text-2xl font-semibold inline-block pb-2 border-b-4 border-blue-600">
-            हाम्रा सेवाहरू
+              हाम्रा सेवाहरू
             </h4>
           </div>
 
-          {/* OUTER BORDER CONTAINER */}
           <div className="border rounded-xl p-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {servicesData.map((item, i) => (
+                <a key={i} href={item.link} className="group block rounded-lg">
+                  <div className="w-full h-40 bg-blue-200 border-2 border-blue-300 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicesData.map((item, i) => (
-              <a
-                key={i}
-                href={item.link}
-                className="group block rounded-lg"
-              >
-                {/* OUTER BORDER BOX */}
-                <div className="w-full h-40 bg-blue-200 border-2 border-blue-300 rounded-lg flex items-center justify-center overflow-hidden">
-                  
-                  {/* IMAGE (centered) */}
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-
-                {/* TEXT ANIMATION */}
-                <h3 className="mt-3 font-medium text-gray-800 transition-colors group-hover:text-blue-600">
-                  {item.title}
-                </h3>
-              </a>
-            ))}
-          </div>
+                  <h3 className="mt-3 font-medium text-gray-800 transition-colors group-hover:text-blue-600">
+                    {item.title}
+                  </h3>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-        {/* RIGHT SIDE */}
+
+        {/* RIGHT SIDE — FETCHED TEAM DATA */}
         <div className="md:col-span-4 space-y-6 mt-18">
 
-          {teamData.map((member, i) => (
-            <div key={i} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
+          {teamData.length === 0 && (
+            <p className="text-gray-500">Loading personnel...</p>
+          )}
+
+          {teamData.map((member) => (
+            <div key={member.id} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
               <div className="flex gap-4">
                 <img
-                  src={member.img}
-                  alt={member.name}
+                  src={member.image_url}
+                  alt={member.full_name}
                   className="w-24 h-24 rounded-lg object-cover"
                 />
                 <div>
-                  <h5 className="text-lg font-semibold">{member.name}</h5>
+                  <h5 className="text-lg font-semibold">{member.full_name}</h5>
                   <p className="text-sm text-gray-600">{member.position}</p>
 
-                  <p className="text-sm mt-2">📞 {member.phone}</p>
+                  <p className="text-sm mt-2">📞 {member.mobile_no}</p>
                   <p className="text-sm">✉️ {member.email}</p>
                 </div>
               </div>

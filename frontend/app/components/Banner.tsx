@@ -3,33 +3,42 @@
 import { useState, useEffect } from "react";
 
 export default function BannerCarousel() {
-  const slides = [
-    {
-      image: "../images/banner/1.jpg",
-      title: "Explore the Beauty of Nepal",
-      subtitle: "Adventure, Culture & History Await",
-    },
-    {
-      image: "../images/banner/2.jpg",
-      title: "Find Your Next Destination",
-      subtitle: "Travel With Us",
-    },
-    {
-      image: "../images/banner/3.jpg",
-      title: "Experience the Mountains",
-      subtitle: "Feel the Nature",
-    },
-  ];
-
+  const [slides, setSlides] = useState<any[]>([]);
   const [current, setCurrent] = useState(0);
 
-  // auto change every 5 seconds
+  const API_URL =
+    process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000";
+
+  // Fetch banners
   useEffect(() => {
+    fetch(`${API_URL}/api/banner`, { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status && Array.isArray(data.data)) {
+          setSlides(data.data); // contains image_url + banner_desc
+        }
+      })
+      .catch((err) => console.error("Banner fetch error:", err));
+  }, [API_URL]);
+
+  // Auto slide every 5 sec
+  useEffect(() => {
+    if (slides.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [slides]);
+
+  if (slides.length === 0) {
+    return (
+      <div className="w-full h-[70vh] flex items-center justify-center bg-gray-200">
+        Loading banners...
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-[70vh] overflow-hidden">
@@ -37,34 +46,35 @@ export default function BannerCarousel() {
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-700 ${
             current === index ? "opacity-100" : "opacity-0"
           }`}
         >
           {/* Background Image */}
           <img
-            src={slide.image}
+            src={slide.image_url}
             alt="Banner"
             className="w-full h-full object-cover"
           />
 
-          {/* Text Content Bottom */}
-          <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-8">
-            <h2 className="text-white text-3xl font-bold">{slide.title}</h2>
-            <p className="text-gray-200 text-lg mt-1">{slide.subtitle}</p>
+          {/* Text bottom */}
+          <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/60 to-transparent p-8">
+            <h2 className="text-white text-3xl font-bold">
+              {slide.banner_desc}
+            </h2>
           </div>
         </div>
       ))}
 
-      {/* Dots indicator */}
+      {/* Dots */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2">
         {slides.map((_, i) => (
           <div
             key={i}
             onClick={() => setCurrent(i)}
-            className={`w-3 h-3 rounded-full cursor-pointer transition ${
-              current === i ? "bg-white" : "bg-white/40"
+            className={`w-3 h-3 rounded-full cursor-pointer ${
+              current === i ? "bg-white" : "bg-white/50"
             }`}
           ></div>
         ))}

@@ -1,64 +1,59 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import axios from "axios";
+import "../globals.css";
 
 export default function NewsTicker() {
-  const messages = [
-    "Here is some important notice for all users.",
-    "New trekking packages have been launched for 2025!",
-    "Office will remain closed tomorrow due to a national holiday.",
-    "Please make sure to submit your documents before the deadline.",
-  ];
-
+  const [messages, setMessages] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
 
-  // Auto-change message every 4 seconds
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  // Fetch news from Laravel API
   useEffect(() => {
+    if (!API_URL) {
+      console.error("❌ Backend URL is missing! Set NEXT_PUBLIC_BACKEND_URL in .env");
+      return;
+    }
+
+    axios
+      .get(`${API_URL}/api/news`, { withCredentials: true })
+      .then((res) => {
+        if (res.data?.status && Array.isArray(res.data.data)) {
+          const headings = res.data.data.map((item: any) => item.news);
+          setMessages(headings);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [API_URL]);
+
+  // Auto-slide effect
+  useEffect(() => {
+    if (messages.length === 0) return;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % messages.length);
-    }, 4000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [messages]);
 
   return (
-    <div className="w-full bg-gray-200 text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto flex items-center gap-3 px-6 py-2 text-sm">
-
-        {/* Notice Label */}
-        <span className="font-semibold bg-blue-200 font-sans text-black px-4 py-1 rounded">
-          समाचार:
-        </span>
-
-        {/* Animated Text */}
-        <div className="relative h-6 text-gray-900 overflow-hidden font-sans flex items-center w-full">
-          <p
-            key={index}
-            className="animate-slide whitespace-nowrap"
-          >
-            {messages[index]}
-          </p>
-        </div>
-
+    <div className="relative h-10 mt-2 text-gray-900 overflow-hidden font-sans flex items-center w-[85%] mx-auto">
+      {/* Label */}
+      <div className="bg-blue-600 text-white py-1 px-3 rounded-l-lg font-semibold">
+        समाचार:
       </div>
 
-      {/* Animation Styles */}
-      <style jsx>{`
-        .animate-slide {
-          animation: slide-in 0.6s ease forwards;
-        }
-
-        @keyframes slide-in {
-          from {
-            opacity: 0;
-            transform: translateX(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
+      {/* Sliding text */}
+      <div className="ml-3 overflow-hidden w-full">
+        {messages.length > 0 && (
+          <p key={index} className="animate-slide whitespace-nowrap text-gray-800 text-sm font-medium">
+            {messages[index]}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

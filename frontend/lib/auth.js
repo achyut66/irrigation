@@ -8,19 +8,19 @@ const API = "http://127.0.0.1:8000";
 
 export async function login(email, password) {
   try {
-    await axios.get(`${API}/sanctum/csrf-cookie`, {
-      withCredentials: true
-    });
+    // Get CSRF cookie from Laravel
+    await axios.get(`${API}/sanctum/csrf-cookie`);
 
-    const response = await axios.post(
-      `${API}/login`,
+    // Send login request
+    const res = await axios.post(
+      `${API}/api/login`,
       { email, password },
       { withCredentials: true }
     );
 
-    return response.data;
-  } catch (e) {
-    console.log(e.response?.data);
-    throw e;
+    return res.data;
+  } catch (err) {
+    console.log("Login error:", err.response?.data);
+    throw err;
   }
 }
