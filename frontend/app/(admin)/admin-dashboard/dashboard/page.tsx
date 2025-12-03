@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Sidebar from "../components/Sidebar";
-import DashboardBody from "../components/DashboardBody";
+import DashboardBody from "../components/AdminDash";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {

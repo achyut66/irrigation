@@ -8,12 +8,12 @@ export default function TechnicalHelpPage() {
 
         {/* Header */}
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 border-l-4 border-indigo-600 pl-3">
-          प्राविधिक सहयोग तथा सहायता – ज्वालामुखी गाउँपालिका
+          प्राविधिक सहयोग तथा सहायता – ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड
         </h1>
 
         {/* Intro */}
         <p className="text-gray-700 leading-relaxed max-w-7xl mb-12">
-          ज्वालामुखी गाउँपालिकाले कृषि, सिँचाइ, प्रविधि, निर्माण तथा प्राविधिक क्षेत्रका
+        ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्डले कृषि, सिँचाइ, प्रविधि, निर्माण तथा प्राविधिक क्षेत्रका
           समस्याहरू समाधान गर्न स्थानीय नागरिक तथा कृषकलाई आवश्यक प्राविधिक सहयोग
           प्रदान गर्दै आएको छ। दक्ष प्राविधिक टोलीद्वारा निरीक्षण, परामर्श, उपकरणको
           जाँच तथा समस्या समाधानको सेवा उपलब्ध गराइन्छ।
@@ -69,7 +69,7 @@ export default function TechnicalHelpPage() {
 
           <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg">
             <Image
-              src="/images/tech1.jpg"
+              src="/images/technical.jpeg"
               alt="Technical Field Visit"
               fill
               className="object-cover"
@@ -81,7 +81,7 @@ export default function TechnicalHelpPage() {
         <div className="grid md:grid-cols-2 gap-10 items-center mb-20">
           <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg md:order-1 order-2">
             <Image
-              src="/images/tech2.jpg"
+              src="/images/help.png"
               alt="Irrigation Technical Assistance"
               fill
               className="object-cover"
@@ -93,7 +93,7 @@ export default function TechnicalHelpPage() {
               कसरी सहयोग प्राप्त गर्ने?
             </h2>
             <ul className="list-disc ml-6 text-gray-700 space-y-2">
-              <li>गाउँपालिका प्राविधिक शाखामा निवेदन दिनुहोस्।</li>
+              <li>ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड प्राविधिक शाखामा निवेदन दिनुहोस्।</li>
               <li>आवश्यक कागजात तथा विवरण बुझाउनुहोस्।</li>
               <li>प्राविधिक टोलीबाट फिल्ड अवलोकन तय हुन्छ।</li>
               <li>समस्या पहिचानपछि समाधानका उपायहरू प्रदान गरिन्छ।</li>
@@ -106,9 +106,9 @@ export default function TechnicalHelpPage() {
           <h3 className="text-xl font-semibold text-indigo-700 mb-2">
             प्राविधिक शाखा सम्पर्क
           </h3>
-          <p className="text-gray-700">ज्वालामुखी गाउँपालिका – प्राविधिक तथा सिँचाइ शाखा</p>
-          <p className="text-gray-700">फोन: ०१०-५५५५५५</p>
-          <p className="text-gray-700">इमेल: info@jwalamukhimun.gov.np</p>
+          <p className="text-gray-700">ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड प्राविधिक तथा सिँचाइ शाखा</p>
+          <p className="text-gray-700">फोन: ९८०३०७९८६८, ९७४१७३४३९३, ९८६११७७८५५, ९८६२७०५५७६</p>
+          <p className="text-gray-700">इमेल: jwlamukhi.rwashm@gmail.com</p>
         </div>
       </div>
 

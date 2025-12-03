@@ -1,9 +1,9 @@
 
 import BannerCarousel from "../components/Banner";
-import ServicesAndTeam from "../components/OurServices";
+import ServicesAndTeam from "../services/OurServices";
 import MissionSection from "../components/Mission";
 import NationalProjects from "../plan/Ayojana";
-import GallerySection from "../components/Gallery";
+import GallerySection from "../gallery/PhotoGallery";
 import NewsHighlightSection from "../components/NewsHighlightSection";
 import Footer from "../components/Footer";
 // import HomeContent from "../../components/Header";

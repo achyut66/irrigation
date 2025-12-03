@@ -31,7 +31,7 @@ export default function ContactUsPage() {
 
   return (
     <>
-    <div className="min-h-screen bg-gray-50 py-10 px-6 md:px-12">
+    <div className="min-h-screen bg-gray-50 py-10 px-6 md:px-22">
 
       <h1 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
         सम्पर्क गर्नुहोस्
@@ -110,13 +110,13 @@ export default function ContactUsPage() {
           <div className="mt-10">
             <h2 className="text-xl font-bold text-gray-800 mb-3">सम्पर्क विवरण</h2>
             <p className="text-gray-700 mb-2">
-              <strong>ठेगाना:</strong> ज्वालामुखी गाउँपालिका, धादिङ
+              <strong>ठेगाना:</strong> ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड, ज्वालामुखी धादिंग
             </p>
             <p className="text-gray-700 mb-2">
-              <strong>फोन:</strong> 010-1234567
+              <strong>फोन:</strong> ९८४१०६४४६१
             </p>
             <p className="text-gray-700 mb-2">
-              <strong>ईमेल:</strong> info@jwalamukhigaupalika.gov.np
+              <strong>ईमेल:</strong> jwalamukhi.rwashmb@gmail.com
             </p>
           </div>
         </form>

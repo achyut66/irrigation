@@ -44,6 +44,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
       <nav className="mt-6 space-y-2">
 
         {/* Dashboard */}
+        <Link href="/admin-dashboard/dashboard">
         <button
           onClick={() => toggleMenu("dashboard")}
           className="flex justify-between w-full p-3 rounded-lg hover:bg-gray-200"
@@ -53,6 +54,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             <span>Dashboard</span>
           </span>
         </button>
+        </Link>
 
         {/* Data Entry */}
         <button
@@ -61,7 +63,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
         >
           <span className="flex items-center space-x-2">
             <Database size={18} />
-            <span>Data Entry</span>
+            <span>Home Page Data</span>
           </span>
 
           {openMenu === "data" ? <ChevronDown /> : <ChevronRight />}
@@ -90,24 +92,52 @@ export default function Sidebar({ onLogout }: SidebarProps) {
               Plan & Proggramme
             </p>
           </Link>
+          <Link href="/admin-dashboard/highlight">
+            <p className="text-sm py-2 px-3 rounded-md hover:bg-blue-100 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-500 cursor-pointer transition-all">
+              Highlight News
+            </p>
+          </Link>
+          <Link href="/admin-dashboard/photoes">
+            <p className="text-sm py-2 px-3 rounded-md hover:bg-blue-100 hover:text-blue-700 border-l-4 border-transparent hover:border-blue-500 cursor-pointer transition-all">
+              Upload Photoes
+            </p>
+          </Link>
         </div>
         
         )}
 
-        {/* Settings */}
+       {/* Menu Bar */}
         <button
           onClick={() => toggleMenu("settings")}
           className="flex justify-between w-full p-3 rounded-lg hover:bg-gray-200"
         >
           <span className="flex items-center space-x-2">
             <Settings size={18} />
-            <span>Settings</span>
+            <span>Menu Data</span>
           </span>
 
           {openMenu === "settings" ? <ChevronDown /> : <ChevronRight />}
         </button>
-      </nav>
 
+        {/* SETTINGS SUBMENU */}
+        {openMenu === "settings" && (
+          <div className="ml-8 mt-1 space-y-1">
+            <Link href="/admin-dashboard/report">
+              <p className="text-sm py-2 px-3 rounded-md hover:bg-blue-100 hover:text-blue-700 border-l-4 
+                border-transparent hover:border-blue-500 cursor-pointer transition-all">
+                Report (प्रतिवेदन Upload)
+              </p>
+            </Link>
+
+            <Link href="/admin-dashboard/laws-rules">
+              <p className="text-sm py-2 px-3 rounded-md hover:bg-blue-100 hover:text-blue-700 border-l-4 
+                border-transparent hover:border-blue-500 cursor-pointer transition-all">
+                 Rules (कानुन / नियम)
+              </p>
+            </Link>
+          </div>
+        )}
+      </nav>
       {/* Logout Button */}
       <div className="mt-auto pt-6 border-t">
         <DangerButton

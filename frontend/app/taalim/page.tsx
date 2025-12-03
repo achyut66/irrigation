@@ -7,7 +7,7 @@ export default function TalimKaryashalaPage() {
       <div className="min-h-screen bg-white ml-4 py-12 px-6 md:px-20">
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 border-l-4 border-green-600 pl-3">
-          तालिम तथा कार्यशाला – ज्वालामुखी गाउँपालिका
+          तालिम तथा कार्यशाला – ज्वालामुखी खानेपानी बोर्ड
         </h1>
 
         {/* Intro Paragraph */}
@@ -34,7 +34,7 @@ export default function TalimKaryashalaPage() {
 
           <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg">
             <Image
-              src="/images/talim1.jpg"
+              src="/images/job.jpg"
               alt="Training Session 1"
               fill
               className="object-cover"
@@ -46,7 +46,7 @@ export default function TalimKaryashalaPage() {
         <div className="grid md:grid-cols-2 gap-10 items-center mb-16">
           <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg md:order-1 order-2">
             <Image
-              src="/images/talim2.jpg"
+              src="/images/tali.jpg"
               alt="Workshop Session"
               fill
               className="object-cover"
@@ -67,11 +67,11 @@ export default function TalimKaryashalaPage() {
         </div>
 
         {/* Gallery Section */}
-        <h2 className="text-2xl font-semibold text-gray-800 mt-10 mb-6 border-l-4 border-green-600 pl-3">
+        {/* <h2 className="text-2xl font-semibold text-gray-800 mt-10 mb-6 border-l-4 border-green-600 pl-3">
           तालिम तथा कार्यशालाका फोटोहरू
-        </h2>
+        </h2> */}
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <div className="relative w-full h-52 rounded-xl overflow-hidden shadow">
             <Image src="/images/talim3.jpg" alt="Training Photo 1" fill className="object-cover" />
           </div>
@@ -81,7 +81,7 @@ export default function TalimKaryashalaPage() {
           <div className="relative w-full h-52 rounded-xl overflow-hidden shadow">
             <Image src="/images/talim5.jpg" alt="Training Photo 3" fill className="object-cover" />
           </div>
-        </div>
+        </div> */}
 
         <p className="text-gray-600 max-w-3xl pb-10">
           थप जानकारीका लागि ज्वालामुखी गाउँपालिकाको कृषि, महिला तथा सामुदायिक विकास शाखामा सम्पर्क गर्नुहोस्।

@@ -16,6 +16,9 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState<any | null>(null);
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -27,6 +30,24 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+  
+    if (value.trim().length < 2) {
+      setResults(null);
+      return;
+    }
+  
+    const res = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(value)}`);
+    const payload = await res.json();
+  
+    if (payload.status) {
+      setResults(payload.data);
+    }
+  };
+  
 
   // CHANGE LANGUAGE FUNCTION
   const changeLanguage = (code: string) => {
@@ -51,17 +72,38 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
       { name: "लक्ष्य / उद्देश्य", path: "/mission" },
     ],
     "/services": [
-      { name: "सिचाइ आयोजना", path: "/sinchai_ayojana" },
+      { name: "सिचाइ आयोजना", path: "/plan/allplans" },
       { name: "तालिम तथा कार्यशाला", path: "/taalim" },
       { name: "प्राविधिक सहयोग", path: "/technical_support" },
     ],
     "/information": [
-      { name: "सूचना", path: "/news-updates" },
+      { name: "सूचना", path: "/highlightnews/highlight-page" },
       { name: "प्रतिवेदन", path: "/pratibedan" },
       { name: "कानुन तथा नीतिहरु", path: "/kanun-niti" },
     ],
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (window.google?.translate?.TranslateElement) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "ne",
+            includedLanguages: "en,ne",
+            autoDisplay: false,
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+        clearInterval(interval);
+      }
+    }, 300);
+  
+    return () => clearInterval(interval);
+  }, []);
+  
+
+  
   return (
     <nav className="w-full bg-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
@@ -141,17 +183,101 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
         <div className="flex items-center space-x-3">
 
           {/* SEARCH */}
-          <div className="flex items-center bg-transparent border border-gray-300 rounded-full px-3 py-1.5">
+          {/* <div className="flex items-center bg-transparent border border-gray-300 rounded-full px-3 py-1.5">
             <Search className="w-5 h-5 text-gray-500" />
             <input
               type="text"
               placeholder="खोज्नुहोस..."
               className="bg-transparent outline-none ml-2 placeholder-gray-500 text-gray-700"
             />
+          </div> */}
+          <div className="relative">
+            <div className="flex items-center bg-transparent border border-gray-300 rounded-full px-3 py-1.5">
+              <Search className="w-5 h-5 text-gray-500" />
+              <input
+                type="text"
+                placeholder="खोज्नुहोस..."
+                className="bg-transparent outline-none ml-2 placeholder-gray-500 text-gray-700"
+                value={search}
+                onChange={handleSearch}
+              />
+            </div>
+
+            {/* SEARCH RESULTS DROPDOWN */}
+            {results && (
+              <div className="absolute left-10 mt-2 w-80 max-h-80 overflow-y-auto bg-white shadow-lg border rounded p-3 z-50">
+
+                {/* ---- NEWS ---- */}
+                {results.news.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-600 border-b pb-1">समाचार</h3>
+                    {results.news.map((item: any) => (
+                      <Link key={item.id} href={`/news/${item.id}`}>
+                        <p className="py-1 text-gray-700 hover:text-blue-600 cursor-pointer">
+                          {item.heading}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* ---- PLANNING ---- */}
+                {results.planning.length > 0 && (
+                  <div className="mt-3">
+                    <h3 className="text-sm font-semibold text-gray-600 border-b pb-1">योजना</h3>
+                    {results.planning.map((item: any) => (
+                      <Link key={item.id} href={`/plan/${item.id}`}>
+                        <p className="py-1 text-gray-700 hover:text-blue-600 cursor-pointer">
+                          {item.title}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* ---- HIGHLIGHT ---- */}
+                {results.highlight.length > 0 && (
+                  <div className="mt-3">
+                    <h3 className="text-sm font-semibold text-gray-600 border-b pb-1">सूचना</h3>
+                    {results.highlight.map((item: any) => (
+                      <Link key={item.id} href={`/highlight/${item.id}`}>
+                        <p className="py-1 text-gray-700 hover:text-blue-600 cursor-pointer">
+                          {item.title}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* ---- LAWS ---- */}
+                {results.lawsrules.length > 0 && (
+                  <div className="mt-3">
+                    <h3 className="text-sm font-semibold text-gray-600 border-b pb-1">कानुन तथा निती</h3>
+                    {results.lawsrules.map((item: any) => (
+                      <Link key={item.id} href={`/kanun-niti/${item.id}`}>
+                        <p className="py-1 text-gray-700 hover:text-blue-600 cursor-pointer">
+                          {item.title}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* NO RESULTS */}
+                {results.news.length === 0 &&
+                  results.planning.length === 0 &&
+                  results.highlight.length === 0 &&
+                  results.lawsrules.length === 0 && (
+                    <p className="text-gray-500 text-sm">कुनै नतिजा फेला परेन।</p>
+                )}
+
+              </div>
+            )}
           </div>
 
+
           {/* LANGUAGE DROPDOWN */}
-          <div className="relative" ref={dropdownRef}>
+          {/* <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setOpen(!open)}
               className="px-4 py-2 border rounded bg-white hover:bg-gray-100"
@@ -175,8 +301,14 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
                 </button>
               </div>
             )}
-          </div>
+          </div> */}
+          {/* <div id="google_translate_element" className="ml-4"></div> */}
+          {/* भाषा:<div id="google_translate_element" className="ml-4 h-[32px] w-[50px] flex items-center overflow-hidden"></div> */}
 
+        </div>
+
+        <div className="relative">
+          <div id="google_translate_element" className="google-translate-btn relative" />
         </div>
 
       </div>

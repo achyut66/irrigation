@@ -36,7 +36,7 @@ export default function Footer() {
 
             {/* Social Icons Under Logo */}
             <div className="flex gap-4 text-2xl mt-4 pl-1">
-                <Link href="https://facebook.com" className="hover:text-blue-300">
+                <Link href="https://www.facebook.com/profile.php?id=100089811023586" className="hover:text-blue-300">
                 <FaFacebookF />
                 </Link>
 
@@ -48,7 +48,7 @@ export default function Footer() {
                 <FaYoutube />
                 </Link>
 
-                <Link href="mailto:support@jwalamukhi.gov.np" className="hover:text-blue-300">
+                <Link href="mailto:jwalamukhi.rwashmb@gmail.com" className="hover:text-blue-300">
                 <FaEnvelope />
                 </Link>
             </div>
@@ -136,7 +136,7 @@ export default function Footer() {
         <div className="mt-10 border-t border-gray-600 pt-5 flex flex-col md:flex-row justify-between gap-5">
           <ul className="text-sm space-y-1">
             <li className="flex gap-2">📍 ज्वालामुखी, धादिंग</li>
-            <li className="flex gap-2">✉ support@jwalamukhi.gov.np</li>
+            <li className="flex gap-2">✉ jwalamukhi.rwashmb@gmail.com</li>
           </ul>
         </div>
 

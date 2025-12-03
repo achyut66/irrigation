@@ -1,39 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { servicesData } from "./serviceData";
 
-const servicesData = [
-  {
-    title: "राष्ट्रिय सिँचाइ कार्यशाला",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123620_glvwpol.jpg",
-    link: "#",
-  },
-  {
-    title: "जलस्रोत व्यवस्थापन",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123725_j2qw4zo.jpg",
-    link: "#",
-  },
-  {
-    title: "अनुसन्धान तथा विकास",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123737_5yys30v.jpg",
-    link: "#",
-  },
-  {
-    title: "जल उपभोक्ता समूहहरू",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123756_f9pkzwh.jpg",
-    link: "#",
-  },
-  {
-    title: "सिँचनीय क्षेत्रफल विस्तार",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123816_hnw26iw.jpg",
-    link: "#",
-  },
-  {
-    title: "भूगर्भीय जल सिँचाइ",
-    img: "https://giwmscdnone.gov.np/media/members/profile_20250728123839_mwtnyfb.jpg",
-    link: "#",
-  },
-];
 
 export default function ServicesAndTeam() {
   const [teamData, setTeamData] = useState<any[]>([]);
@@ -47,11 +16,11 @@ export default function ServicesAndTeam() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.status && Array.isArray(data.data)) {
-          setTeamData(data.data);
+          setTeamData(data.data.slice(0, 4)); // LIMIT TO 3
         }
       })
       .catch((err) => console.error("Authority fetch error:", err));
-  }, [API_URL]);
+  }, [API_URL]);  
 
   return (
     <div className="w-full py-10">
@@ -60,16 +29,16 @@ export default function ServicesAndTeam() {
         {/* LEFT SIDE */}
         <div className="md:col-span-8">
           <div className="mb-6">
-            <h4 className="text-2xl font-semibold inline-block pb-2 border-b-4 border-blue-600">
+            <h4 className="text-3xl text-gray-500 font-semibold inline-block pb-2 border-b-4 border-blue-600">
               हाम्रा सेवाहरू
             </h4>
           </div>
 
-          <div className="border rounded-xl p-5">
+          <div className="shadow-sm rounded-xl border-1 border-blue-100 p-6">
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {servicesData.map((item, i) => (
-                <a key={i} href={item.link} className="group block rounded-lg">
-                  <div className="w-full h-40 bg-blue-200 border-2 border-blue-300 rounded-lg flex items-center justify-center overflow-hidden">
+                  <a key={i} href={`/services/${item.id}`} className="group block rounded-lg">
+                  <div className="w-full h-40 bg-gray-100 shadow-xl rounded-lg flex items-center justify-center overflow-hidden">
                     <img
                       src={item.img}
                       alt={item.title}
@@ -94,20 +63,23 @@ export default function ServicesAndTeam() {
           )}
 
           {teamData.map((member) => (
-            <div key={member.id} className="border rounded-lg p-4 shadow-sm hover:shadow-lg transition">
-              <div className="flex gap-4">
+            <div key={member.id} className="rounded-lg p-2 shadow-xl hover:shadow-lg transition max-h-24">
+              <div className="flex gap-4 max-h-20">
                 <img
                   src={member.image_url}
                   alt={member.full_name}
-                  className="w-24 h-24 rounded-lg object-cover"
+                  className="w-20 h-20 rounded-lg object-cover"
                 />
                 <div>
                   <h5 className="text-lg font-semibold">{member.full_name}</h5>
                   <p className="text-sm text-gray-600">{member.position}</p>
 
-                  <p className="text-sm mt-2">📞 {member.mobile_no}</p>
-                  <p className="text-sm">✉️ {member.email}</p>
+                  <div className="flex items-center gap-4 mt-2">
+                    <p className="text-sm">📞 {member.mobile_no}</p>
+                    <p className="text-sm">✉️ {member.email}</p>
+                  </div>
                 </div>
+
               </div>
             </div>
           ))}

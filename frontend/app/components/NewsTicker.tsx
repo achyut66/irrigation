@@ -49,7 +49,7 @@ export default function NewsTicker() {
       {/* Sliding text */}
       <div className="ml-3 overflow-hidden w-full">
         {messages.length > 0 && (
-          <p key={index} className="animate-slide whitespace-nowrap text-gray-800 text-sm font-medium">
+          <p key={index} className="animate-slide whitespace-nowrap text-blue-800 font-bold text-sm">
             {messages[index]}
           </p>
         )}

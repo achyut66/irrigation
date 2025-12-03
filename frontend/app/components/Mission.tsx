@@ -14,7 +14,7 @@ export default function MissionSection() {
           {/* RIGHT CONTENT */}
           <div>
   {/* Heading */}
-  <h2 className="text-3xl font-bold mb-12 border-b-4 border-blue-500 inline-block pb-1">
+  <h2 className="text-3xl text-left text-gray-500 font-bold mb-12 border-b-4 border-blue-500 inline-block pb-1">
   हाम्रो उद्देश्य
   </h2>
 

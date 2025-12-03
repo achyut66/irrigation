@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Navbar from "./Navbar";
 import NewsTicker from "./NewsTicker";
 import HeaderNav from "./Header";
+import ScrollToTop from "./ScrollToUp";
 
 export default function StickyLayout() {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -74,6 +75,7 @@ export default function StickyLayout() {
       >
         <NewsTicker />
       </div>
+      <ScrollToTop/>
 
       {/* PUSH PAGE CONTENT DOWN */}
       <div style={{ paddingTop: hideNavbar ? 140 : navHeight + 120 }}>
