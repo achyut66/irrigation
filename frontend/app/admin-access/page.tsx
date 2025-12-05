@@ -19,13 +19,20 @@ export default function LoginPage() {
     try {
       const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-      // 🔥 DIRECT LOGIN (NO CSRF, NO COOKIES)
+      // Step 1: Get CSRF cookie from Laravel
+      await fetch(`${API_URL}/sanctum/csrf-cookie`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // Step 2: Login using cookie session
       const res = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        credentials: "include", // VERY IMPORTANT!
         body: JSON.stringify({ email, password }),
       });
 
@@ -37,11 +44,10 @@ export default function LoginPage() {
         return;
       }
 
-      // 🔥 Save token
-      localStorage.setItem("token", data.token);
-
+      // Step 3: Redirect (no need to save token)
       router.push("/admin-dashboard/dashboard");
-    } catch (err: any) {
+
+    } catch (err) {
       console.error("Login error:", err);
       setError("Something went wrong. Please try again.");
     }
@@ -51,7 +57,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="min-h-20 flex items-center justify-center bg-gray-100 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
         <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm">
 
           {/* Logo */}
@@ -63,7 +69,7 @@ export default function LoginPage() {
             Administrator Login
           </h1>
 
-          {/* Error */}
+          {/* Error Message */}
           {error && (
             <div className="bg-red-100 text-red-700 p-2 rounded mb-4 text-sm">
               {error}
@@ -88,7 +94,7 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             onClick={handleLogin}
             disabled={loading}
