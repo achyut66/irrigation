@@ -27,6 +27,7 @@ export default function LoginPage() {
       });
 
       // STEP 2 — Login request
+      // the name
       const res = await fetch("https://api.rwashmb.com/login", {
         method: "POST",
         credentials: "include",
