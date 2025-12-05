@@ -71,7 +71,7 @@ export default function LoginPage() {
       console.log("CSRF Token found:", csrfToken.substring(0, 20) + "...");
 
       // 2️⃣ Login API call (Laravel route: /api/login)
-      const res = await fetch(`${API_URL}/login`, {
+      const res = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         credentials: "include",
         headers: {
