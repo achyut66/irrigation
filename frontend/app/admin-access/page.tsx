@@ -19,22 +19,9 @@ export default function LoginPage() {
     try {
       const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-      // 1️⃣ Get CSRF cookie (Sanctum)
-      const csrf = await fetch(`${API_URL}/sanctum/csrf-cookie`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      if (!csrf.ok) {
-        setError("Failed to get CSRF cookie");
-        setLoading(false);
-        return;
-      }
-
-      // 2️⃣ Login request
+      // 🔥 DIRECT LOGIN (NO CSRF, NO COOKIES)
       const res = await fetch(`${API_URL}/api/login`, {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -42,16 +29,18 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        setError(err?.message || "Invalid credentials");
+        setError(data?.message || "Invalid credentials");
         setLoading(false);
         return;
       }
 
-      // Success — redirect to dashboard
-      router.push("/admin-dashboard/dashboard");
+      // 🔥 Save token
+      localStorage.setItem("token", data.token);
 
+      router.push("/admin-dashboard/dashboard");
     } catch (err: any) {
       console.error("Login error:", err);
       setError("Something went wrong. Please try again.");
