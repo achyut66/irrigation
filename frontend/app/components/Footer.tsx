@@ -11,48 +11,48 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-10">
 
           {/* LEFT — Logo & Office Info */}
-         {/* LEFT — Logo & Office Info */}
-            <div>
+          {/* LEFT — Logo & Office Info */}
+          <div>
             <div className="flex gap-3 items-center">   {/* UPDATED */}
-                <div className="relative w-28 h-28 flex-shrink-0">  {/* UPDATED SIZE */}
+              <div className="relative w-28 h-28 flex-shrink-0">  {/* UPDATED SIZE */}
                 <Image
-                    src="/images/Nepalg.png"
-                    alt="Nepal Emblem"
-                    fill
-                    className="object-contain"
+                  src="/images/Nepalg.png"
+                  alt="Nepal Emblem"
+                  fill
+                  className="object-contain"
                 />
-                </div>
+              </div>
 
-                <div>
+              <div>
                 <p className="text-sm leading-tight">
-                    ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड
+                  ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड
                 </p>
                 <h4 className="text-lg font-bold leading-tight">
-                    जलस्रोत तथा सिँचाइ विभाग
+                  जलस्रोत तथा सिँचाइ विभाग
                 </h4>
                 <p className="text-sm mt-1 leading-tight">ज्वालामुखी, धादिंग</p>
-                </div>
+              </div>
             </div>
 
             {/* Social Icons Under Logo */}
             <div className="flex gap-4 text-2xl mt-4 pl-1">
-                <Link href="https://www.facebook.com/profile.php?id=100089811023586" className="hover:text-blue-300">
+              <Link href="https://www.facebook.com/profile.php?id=100089811023586" className="hover:text-blue-300">
                 <FaFacebookF />
-                </Link>
+              </Link>
 
-                <Link href="https://instagram.com" className="hover:text-blue-300">
+              <Link href="https://instagram.com" className="hover:text-blue-300">
                 <FaInstagram />
-                </Link>
+              </Link>
 
-                <Link href="https://youtube.com" className="hover:text-blue-300">
+              <Link href="https://youtube.com" className="hover:text-blue-300">
                 <FaYoutube />
-                </Link>
+              </Link>
 
-                <Link href="mailto:jwalamukhi.rwashmb@gmail.com" className="hover:text-blue-300">
+              <Link href="mailto:jwalamukhi.rwashmb@gmail.com" className="hover:text-blue-300">
                 <FaEnvelope />
-                </Link>
+              </Link>
             </div>
-            </div>
+          </div>
 
 
           {/* MIDDLE — Office Hours */}
@@ -141,7 +141,7 @@ export default function Footer() {
         </div>
 
         <div className="text-center text-xs text-gray-400 mt-6 pb-4">
-          © {new Date().getFullYear()} ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड।
+          © <span suppressHydrationWarning>{new Date().getFullYear()}</span> ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड।
         </div>
       </div>
     </footer>
