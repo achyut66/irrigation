@@ -15,34 +15,36 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     setError("");
-
+  
     try {
       // STEP 1: Get CSRF cookie
       await api.get("/sanctum/csrf-cookie");
-
+  
       // STEP 2: Attempt login
-      const res = await api.post("/login", {
-        email,
-        password,
+      const data = {
+        email: email,
+        password: password,
+      };
+  
+      const res = await api.post("https://api.rwashmb.com/login", data, {
+        withCredentials: true,
       });
-
-      // If login failed
+  
       if (res.status !== 200) {
         setError("Invalid credentials");
         setLoading(false);
         return;
       }
-
-      // Success → redirect
+  
       router.push("/admin-dashboard/dashboard");
-
     } catch (err) {
       console.error("Login error:", err);
       setError("Invalid email or password.");
     }
-
+  
     setLoading(false);
   };
+  
 
   return (
     <>
