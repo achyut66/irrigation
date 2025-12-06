@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import api from "../../lib/axios";  
+// import api from "../../lib/axios";  
 import Footer from "../components/Footer";
 
 export default function LoginPage() {
@@ -17,33 +17,44 @@ export default function LoginPage() {
     setError("");
   
     try {
+      setLoading(true);
+      setError("");
+    
       // STEP 1: Get CSRF cookie
-      await api.get("/sanctum/csrf-cookie");
-  
-      // STEP 2: Attempt login
-      const data = {
-        email: email,
-        password: password,
-      };
-  
-      const res = await api.post("https://api.rwashmb.com/login", data, {
-        withCredentials: true,
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
+        method: "GET",
+        credentials: "include",
       });
-  
-      if (res.status !== 200) {
+    
+      // STEP 2: Login request
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+    
+      // Check login status
+      if (!res.ok) {
         setError("Invalid credentials");
         setLoading(false);
         return;
       }
-  
+    
+      // Optional: read response
+      // const result = await res.json();
+    
       router.push("/admin-dashboard/dashboard");
+      
     } catch (err) {
       console.error("Login error:", err);
       setError("Invalid email or password.");
+    } finally {
+      setLoading(false);
     }
-  
-    setLoading(false);
-  };
+  }    
   
 
   return (
