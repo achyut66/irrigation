@@ -26,7 +26,7 @@ export default function LoginPage() {
           "X-Requested-With": "XMLHttpRequest",
         },
       });
-
+      // the right one
       // Get the XSRF token from cookies
       const cookies = document.cookie.split("; ");
       const xsrf = cookies.find(row => row.startsWith("XSRF-TOKEN="));
