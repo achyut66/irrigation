@@ -17,6 +17,7 @@ export default function LoginPage() {
     setError("");
 
     try {
+      // changed nothing
       // STEP 1 — Fetch CSRF cookie (sets XSRF-TOKEN cookie)
       await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
         method: "GET",
