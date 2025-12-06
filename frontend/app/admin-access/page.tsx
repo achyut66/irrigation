@@ -17,7 +17,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // STEP 1 — Get CSRF cookie
+      // STEP 1 — Fetch CSRF cookie (sets XSRF-TOKEN cookie)
       await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
         method: "GET",
         credentials: "include",
@@ -26,14 +26,21 @@ export default function LoginPage() {
         },
       });
 
+      // Get the XSRF token from cookies
+      const cookies = document.cookie.split("; ");
+      const xsrf = cookies.find(row => row.startsWith("XSRF-TOKEN="));
+
+      let token = xsrf ? xsrf.split("=")[1] : "";
+      token = decodeURIComponent(token); // VERY IMPORTANT
+
       // STEP 2 — Login request
-      // the name
       const res = await fetch("https://api.rwashmb.com/login", {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
           "X-Requested-With": "XMLHttpRequest",
+          "X-XSRF-TOKEN": token,   // ← REQUIRED
         },
         body: JSON.stringify({
           email,
@@ -49,7 +56,6 @@ export default function LoginPage() {
         return;
       }
 
-      // STEP 3 — Redirect on success
       router.push("/admin-dashboard/dashboard");
 
     } catch (err) {
