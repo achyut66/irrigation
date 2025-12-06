@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 // import api from "../../lib/axios";  
+import { getCookie } from "../../utils/getCookie";
 import Footer from "../components/Footer";
 
 export default function LoginPage() {
@@ -17,45 +18,47 @@ export default function LoginPage() {
     setError("");
   
     try {
-      setLoading(true);
-      setError("");
-    
       // STEP 1: Get CSRF cookie
       await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
         method: "GET",
         credentials: "include",
       });
-    
-      // STEP 2: Login request
+  
+      // STEP 2: Read the XSRF token
+      const xsrf = getCookie("XSRF-TOKEN");
+      const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
+  
+      // STEP 3: Login request
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
+          "X-XSRF-TOKEN": decodedToken,
         },
         body: JSON.stringify({ email, password }),
       });
-    
-      // Check login status
+  
+      // STEP 4: Check response
       if (!res.ok) {
         setError("Invalid credentials");
         setLoading(false);
         return;
       }
-    
-      // Optional: read response
-      // const result = await res.json();
-    
+  
+      // (Optional) const data = await res.json();
+  
+      // STEP 5: Redirect after login success
       router.push("/admin-dashboard/dashboard");
-      
+  
     } catch (err) {
       console.error("Login error:", err);
-      setError("Invalid email or password.");
+      setError("Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
-  }    
-  
+  };
+   
 
   return (
     <>
