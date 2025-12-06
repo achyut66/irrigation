@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import api from "../../lib/axios";  
 import Footer from "../components/Footer";
 
 export default function LoginPage() {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,51 +17,28 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // changed nothing
-      // STEP 1 — Fetch CSRF cookie (sets XSRF-TOKEN cookie)
-      await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-        },
-      });
-      // the right one
-      // Get the XSRF token from cookies
-      const cookies = document.cookie.split("; ");
-      const xsrf = cookies.find(row => row.startsWith("XSRF-TOKEN="));
+      // STEP 1: Get CSRF cookie
+      await api.get("/sanctum/csrf-cookie");
 
-      let token = xsrf ? xsrf.split("=")[1] : "";
-      token = decodeURIComponent(token); // VERY IMPORTANT
-
-      // STEP 2 — Login request
-      const res = await fetch("https://api.rwashmb.com/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          "X-XSRF-TOKEN": token,   // ← REQUIRED
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+      // STEP 2: Attempt login
+      const res = await api.post("/login", {
+        email,
+        password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data?.message || "Invalid credentials");
+      // If login failed
+      if (res.status !== 200) {
+        setError("Invalid credentials");
         setLoading(false);
         return;
       }
 
+      // Success → redirect
       router.push("/admin-dashboard/dashboard");
 
     } catch (err) {
       console.error("Login error:", err);
-      setError("Something went wrong. Please try again.");
+      setError("Invalid email or password.");
     }
 
     setLoading(false);
@@ -109,6 +86,7 @@ export default function LoginPage() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
+
         </div>
       </div>
 
