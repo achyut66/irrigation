@@ -129,23 +129,24 @@ export default function NewsUpdate() {
     setIsSubmitting(true);
   
     try {
-      const csrfToken = await fetchCsrfToken(API_URL);
+      // const csrfToken = await fetchCsrfToken(API_URL);
   
       const formData = new FormData();
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
-
+    const token = getCookie("XSRF-TOKEN");
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json",
-          "X-XSRF-TOKEN": decodeURIComponent(getCookie("XSRF-TOKEN"))
+          "X-XSRF-TOKEN": token ? decodeURIComponent(token) : "",
+          "Accept": "application/json",
         },
-        body: JSON.stringify(data)
+        body: formData,
       });
       
+  
       const payload = await response.json();
   
       if (!response.ok || !payload?.status) {
