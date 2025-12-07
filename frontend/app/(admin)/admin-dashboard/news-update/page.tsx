@@ -143,11 +143,12 @@ export default function NewsUpdate() {
         credentials: "include",
         body: formData,  // DO NOT SET HEADERS
       });
+      // /
   
       const payload = await response.json();
   
       if (!response.ok || !payload?.status) {
-        alert(payload?.message || "Unable to add news.");
+        alert(payload?.message || "Unable to add news 123.");
         return;
       }
   
