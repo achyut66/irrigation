@@ -12,7 +12,6 @@ type NewsItem = {
   image?: File | null;
 };
 
-// console.log('server-name', process.env.NEXT_PUBLIC_BACKEND_URL);
 const resolveApiUrl = () => {
   if (process.env.NEXT_PUBLIC_BACKEND_URL) {
     return process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -55,6 +54,8 @@ const authHeaders = (token: string) => ({
 export default function NewsUpdate() {
   const API_URL = resolveApiUrl();
   const router = useRouter();
+
+  console.log('app_url_is',API_URL);
 
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [form, setForm] = useState({
@@ -120,57 +121,37 @@ export default function NewsUpdate() {
   /** -----------------------------------------
    * SUBMIT CREATE NEWS
    ------------------------------------------*/
-   const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
   
     setIsSubmitting(true);
   
     try {
-      // STEP 1 — Get CSRF cookies
-      await fetch(`${API_URL}/sanctum/csrf-cookie`, {
-        credentials: "include",
-        method:"GET",
-      });
-     
+      const csrfToken = await fetchCsrfToken(API_URL);
   
-      // STEP 2 — Prepare form data
       const formData = new FormData();
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
   
-      // STEP 3 — Send request (NO HEADERS)
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
-        body: formData,  // DO NOT SET HEADERS
+        headers: authHeaders(csrfToken),
+        body: formData,
       });
-      
-      // print raw response
-const text = await response.text();
-console.log("RAW RESPONSE:", text);
-
-// Try to parse JSON safely
-try {
-  const json = JSON.parse(text);
-  console.log("JSON:", json);
-} catch (err) {
-  console.error("Not JSON:", err);
-}
-      // /
   
       const payload = await response.json();
   
       if (!response.ok || !payload?.status) {
-        alert(payload?.message || "Unable to add news 123.");
+        alert(payload?.message || "Unable to add news.");
         return;
       }
   
       setForm({ heading: "", news: "", image: null });
       await loadNews();
       router.refresh();
-  
     } catch (error) {
       console.error("News submit error:", error);
       alert("Unable to add news.");
@@ -178,7 +159,7 @@ try {
       setIsSubmitting(false);
     }
   };
-   
+  
   /** -----------------------------------------
    * DELETE NEWS
    ------------------------------------------*/
