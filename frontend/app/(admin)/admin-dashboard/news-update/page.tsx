@@ -12,7 +12,7 @@ type NewsItem = {
   image?: File | null;
 };
 
-console.log('server-name', process.env.NEXT_PUBLIC_BACKEND_URL);
+// console.log('server-name', process.env.NEXT_PUBLIC_BACKEND_URL);
 const resolveApiUrl = () => {
   if (process.env.NEXT_PUBLIC_BACKEND_URL) {
     return process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -130,7 +130,9 @@ export default function NewsUpdate() {
       // STEP 1 — Get CSRF cookies
       await fetch(`${API_URL}/sanctum/csrf-cookie`, {
         credentials: "include",
+        method:"GET",
       });
+     
   
       // STEP 2 — Prepare form data
       const formData = new FormData();
@@ -144,8 +146,18 @@ export default function NewsUpdate() {
         credentials: "include",
         body: formData,  // DO NOT SET HEADERS
       });
-      const raw = await response.text();
-      console.log("RAW RESPONSE:", raw);
+      
+      // print raw response
+const text = await response.text();
+console.log("RAW RESPONSE:", text);
+
+// Try to parse JSON safely
+try {
+  const json = JSON.parse(text);
+  console.log("JSON:", json);
+} catch (err) {
+  console.error("Not JSON:", err);
+}
       // /
   
       const payload = await response.json();
