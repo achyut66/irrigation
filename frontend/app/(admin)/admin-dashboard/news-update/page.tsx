@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/navigation";
-import {getCookie} from "../../../../utils/getCookie";
+import { getCookie } from "../../../../utils/getCookie";
 
 type NewsItem = {
   id: number;
@@ -135,7 +135,9 @@ export default function NewsUpdate() {
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
-    const token = getCookie("XSRF-TOKEN");
+
+      const token = getCookie("XSRF-TOKEN");
+      
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
