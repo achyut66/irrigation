@@ -122,22 +122,22 @@ export default function NewsUpdate() {
   /** -----------------------------------------
    * SUBMIT CREATE NEWS
    ------------------------------------------*/
-  const handleSubmit = async (e: React.FormEvent) => {
+   const handleSubmit = async (e:any) =>{
     e.preventDefault();
-    if (isSubmitting) return;
-  
     setIsSubmitting(true);
   
     try {
-      // const csrfToken = await fetchCsrfToken(API_URL);
+      await fetch(`${API_URL}/sanctum/csrf-cookie`, {
+        credentials: "include",
+      });
+  
+      const token = getCookie("XSRF-TOKEN");
   
       const formData = new FormData();
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
-
-      const token = getCookie("XSRF-TOKEN");
-      
+  
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
@@ -147,25 +147,17 @@ export default function NewsUpdate() {
         },
         body: formData,
       });
-      
   
       const payload = await response.json();
+      console.log(payload);
   
-      if (!response.ok || !payload?.status) {
-        alert(payload?.message || "Unable to add news.");
-        return;
-      }
-  
-      setForm({ heading: "", news: "", image: null });
-      await loadNews();
-      router.refresh();
-    } catch (error) {
-      console.error("News submit error:", error);
-      alert("Unable to add news.");
+    } catch (err) {
+      console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
+  
   
   /** -----------------------------------------
    * DELETE NEWS
