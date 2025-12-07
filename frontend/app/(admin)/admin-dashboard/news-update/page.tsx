@@ -134,26 +134,14 @@ export default function NewsUpdate() {
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
-  
-      // const response = await fetch(`${API_URL}/api/news`, {
-      //   method: "POST",
-      //   credentials: "include",
-      //   headers: authHeaders(csrfToken),
-      //   body: formData,
-      // });
+
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          title: "test",
-          content: "test content"
-        })
+        credentials: "include",
+        headers: authHeaders(csrfToken),
+        body: formData,
       });
       
-  
       const payload = await response.json();
   
       if (!response.ok || !payload?.status) {
