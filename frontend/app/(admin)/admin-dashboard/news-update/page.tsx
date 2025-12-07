@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/navigation";
-import { getCookie } from "../../../../utils/getCookie";
+// import {getCookie} from "../../../../utils/getCookie";
 
 type NewsItem = {
   id: number;
@@ -122,16 +122,14 @@ export default function NewsUpdate() {
   /** -----------------------------------------
    * SUBMIT CREATE NEWS
    ------------------------------------------*/
-   const handleSubmit = async (e:any) =>{
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+  
     setIsSubmitting(true);
   
     try {
-      await fetch(`${API_URL}/sanctum/csrf-cookie`, {
-        credentials: "include",
-      });
-  
-      const token = getCookie("XSRF-TOKEN");
+      const csrfToken = await fetchCsrfToken(API_URL);
   
       const formData = new FormData();
       formData.append("heading", form.heading);
@@ -141,23 +139,27 @@ export default function NewsUpdate() {
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
-        headers: {
-          "X-XSRF-TOKEN": token ? decodeURIComponent(token) : "",
-          "Accept": "application/json",
-        },
+        headers: authHeaders(csrfToken),
         body: formData,
       });
   
       const payload = await response.json();
-      console.log(payload);
   
-    } catch (err) {
-      console.error(err);
+      if (!response.ok || !payload?.status) {
+        alert(payload?.message || "Unable to add news.");
+        return;
+      }
+  
+      setForm({ heading: "", news: "", image: null });
+      await loadNews();
+      router.refresh();
+    } catch (error) {
+      console.error("News submit error:", error);
+      alert("Unable to add news.");
     } finally {
       setIsSubmitting(false);
     }
   };
-  
   
   /** -----------------------------------------
    * DELETE NEWS
