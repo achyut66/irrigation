@@ -144,6 +144,8 @@ export default function NewsUpdate() {
         credentials: "include",
         body: formData,  // DO NOT SET HEADERS
       });
+      const raw = await response.text();
+      console.log("RAW RESPONSE:", raw);
       // /
   
       const payload = await response.json();
