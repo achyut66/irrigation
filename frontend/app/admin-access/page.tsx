@@ -29,7 +29,7 @@ export default function LoginPage() {
       const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
   
       // STEP 3: Login request
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
         method: "POST",
         credentials: "include",
         headers: {
