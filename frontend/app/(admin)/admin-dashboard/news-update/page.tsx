@@ -138,8 +138,11 @@ export default function NewsUpdate() {
       const response = await fetch(`${API_URL}/api/news`, {
         method: "POST",
         credentials: "include",
-        headers: authHeaders(csrfToken),
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          "X-XSRF-TOKEN": decodeURIComponent(getCookie("XSRF-TOKEN"))
+        },
+        body: JSON.stringify(data)
       });
       
       const payload = await response.json();
