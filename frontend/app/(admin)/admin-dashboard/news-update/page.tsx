@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/navigation";
-// import {getCookie} from "../../../../utils/getCookie";
+import {getCookie} from "../../../../utils/getCookie";
 
 type NewsItem = {
   id: number;
@@ -129,17 +129,35 @@ export default function NewsUpdate() {
     setIsSubmitting(true);
   
     try {
-      const csrfToken = await fetchCsrfToken(API_URL);
+      // const csrfToken = await fetchCsrfToken(API_URL);
   
       const formData = new FormData();
       formData.append("heading", form.heading);
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
+
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
+        method: "GET",
+        credentials: "include",
+      });
   
-      const response = await fetch(`${API_URL}/api/news`, {
+      // STEP 2: Read the XSRF token
+      const xsrf = getCookie("XSRF-TOKEN");
+      const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
+  
+      // const response = await fetch(`${API_URL}/api/news`, {
+      //   method: "POST",
+      //   credentials: "include",
+      //   headers: authHeaders(csrfToken),
+      //   body: formData,
+      // });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/news`, {
         method: "POST",
         credentials: "include",
-        headers: authHeaders(csrfToken),
+        headers: {
+          "Content-Type": "application/json",
+          "X-XSRF-TOKEN": decodedToken,
+        },
         body: formData,
       });
   
