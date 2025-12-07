@@ -55,7 +55,7 @@ export default function NewsUpdate() {
   const API_URL = resolveApiUrl();
   const router = useRouter();
 
-  console.log('app_url_is',API_URL);
+  // console.log('app_url_is',API_URL);
 
   const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [form, setForm] = useState({
