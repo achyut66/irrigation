@@ -136,10 +136,6 @@ export default function NewsUpdate() {
       formData.append("news", form.news);
       if (form.image) formData.append("image", form.image);
 
-      // await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
-      //   method: "GET",
-      //   credentials: "include",
-      // });
       await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
         method: "GET",
         credentials: "include",
@@ -157,8 +153,12 @@ export default function NewsUpdate() {
       // });
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/news`, {
         method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "X-XSRF-TOKEN": decodedToken,
+        },
         body: formData,
-        credentials: "include",   // REQUIRED
       });
   
       const payload = await response.json();
