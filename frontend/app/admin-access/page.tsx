@@ -19,6 +19,10 @@ export default function LoginPage() {
   
     try {
       // STEP 1: Get CSRF cookie
+      // await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
+      //   method: "GET",
+      //   credentials: "include",
+      // });
       await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
         method: "GET",
         credentials: "include",
@@ -29,13 +33,19 @@ export default function LoginPage() {
       const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
   
       // STEP 3: Login request
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
+      //   method: "POST",
+      //   credentials: "include",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "X-XSRF-TOKEN": decodedToken,
+      //   },
+      //   body: JSON.stringify({ email, password }),
+      // });
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
         method: "POST",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "X-XSRF-TOKEN": decodedToken,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
   
