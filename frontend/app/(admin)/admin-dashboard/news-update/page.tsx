@@ -12,6 +12,7 @@ type NewsItem = {
   image?: File | null;
 };
 
+console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
 const resolveApiUrl = () => {
   if (process.env.NEXT_PUBLIC_BACKEND_URL) {
     return process.env.NEXT_PUBLIC_BACKEND_URL;
