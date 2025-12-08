@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-// import api from "../../lib/axios";  
 import { getCookie } from "../../utils/getCookie";
 import Footer from "../components/Footer";
 
@@ -16,61 +15,53 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     setError("");
-  
+
     try {
-      // STEP 1: Get CSRF cookie
-      // await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
-      //   method: "GET",
-      //   credentials: "include",
-      // });
-      await fetch('https://api.rwashmb.com/sanctum/csrf-cookie', {
-        method: 'GET',
-        credentials: 'include'
+      // 🔥 STEP 1: GET CSRF COOKIE (MUST BE FIRST)
+      await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
+        method: "GET",
+        credentials: "include",   // MUST HAVE
       });
-  
-      // STEP 2: Read the XSRF token
-      const xsrf = getCookie("XSRF-TOKEN");
-      const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
-  
-      // STEP 3: Login request
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
-      //   method: "POST",
-      //   credentials: "include",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "X-XSRF-TOKEN": decodedToken,
-      //   },
-      //   body: JSON.stringify({ email, password }),
-      // });
-      const res = await fetch('https://api.rwashmb.com/login', {
-        method: 'POST',
-        credentials: 'include',
+
+      // 🔥 STEP 2: READ COOKIE (Laravel sets it automatically)
+      const token = getCookie("XSRF-TOKEN");
+      if (!token) {
+        setError("Unable to get CSRF token");
+        setLoading(false);
+        return;
+      }
+
+      // 🔥 STEP 3: SEND LOGIN REQUEST
+      const res = await fetch("https://api.rwashmb.com/login", {
+        method: "POST",
+        credentials: "include",   // VERY IMPORTANT
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "X-XSRF-TOKEN": decodeURIComponent(token),   // MUST SEND THIS
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
       });
-  
-      // STEP 4: Check response
+
       if (!res.ok) {
         setError("Invalid credentials");
         setLoading(false);
         return;
       }
-  
-      // (Optional) const data = await res.json();
-  
-      // STEP 5: Redirect after login success
+
+      // 🔥 STEP 4: Redirect on success
       router.push("/admin-dashboard/dashboard");
-  
+
     } catch (err) {
       console.error("Login error:", err);
-      setError("Something went wrong. Try again.");
+      setError("Something went wrong, please try again.");
     } finally {
       setLoading(false);
     }
   };
-   
 
   return (
     <>
@@ -114,7 +105,6 @@ export default function LoginPage() {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-
         </div>
       </div>
 
