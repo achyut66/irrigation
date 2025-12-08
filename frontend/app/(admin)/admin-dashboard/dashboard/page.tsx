@@ -32,9 +32,9 @@ export default function DashboardPage() {
         }
 
         // Optional: admin check
-        if (!data.isAdmin) {
-          return router.replace("/admin-access");
-        }
+        // if (!data.isAdmin) {
+        //   return router.replace("/admin-access");
+        // }
 
         setIsChecking(false);
       } catch {
