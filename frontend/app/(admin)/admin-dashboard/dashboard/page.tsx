@@ -37,13 +37,13 @@ export default function DashboardPage() {
         }
 
         setIsChecking(false);
-      } catch (err) {
+      } catch {
         router.replace("/admin-access");
       }
     };
 
     checkAdmin();
-  }, []);
+  }, [router, API_URL]);
 
   const handleLogout = async () => {
     await fetch(`${API_URL}/api/logout`, {
