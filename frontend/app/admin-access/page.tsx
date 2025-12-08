@@ -1,55 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie } from "../../utils/getCookie";
 import Footer from "../components/Footer";
 
 export default function LoginPage() {
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [checking, setChecking] = useState(true); // ⬅ checking auth state
 
-  // 🔥 0️⃣ CHECK IF USER IS ALREADY LOGGED IN
-  useEffect(() => {
-    const verify = async () => {
-      try {
-        const res = await fetch("https://api.rwashmb.com/api/user", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (res.ok) {
-          // already logged in
-          return router.replace("/admin-dashboard/dashboard");
-        }
-      } catch (e) {
-        console.log("Not logged in");
-      }
-
-      setChecking(false); // show login form
-    };
-
-    verify();
-  }, []);
-
-  // ⏳ While checking, show loader
-  if (checking) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Checking authentication...
-      </div>
-    );
-  }
-
-  // 🔑 LOGIN HANDLER
   const handleLogin = async (e:any) => {
-    e.preventDefault();
+    e.preventDefault(); // 🔥 STOP PAGE REFRESH
     setLoading(true);
     setError("");
 
@@ -103,6 +67,7 @@ export default function LoginPage() {
     <>
       <div className="min-h-20 flex items-center justify-center bg-gray-100 p-4">
         <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm">
+
           <form onSubmit={handleLogin}>
             <div className="flex justify-center mb-4">
               <img src="/images/logo.png" className="h-20 w-20" />
