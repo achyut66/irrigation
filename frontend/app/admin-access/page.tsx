@@ -48,7 +48,7 @@ export default function LoginPage() {
   }
 
   // 🔑 LOGIN HANDLER
-  const handleLogin = async (e) => {
+  const handleLogin = async (e:any) => {
     e.preventDefault();
     setLoading(true);
     setError("");
