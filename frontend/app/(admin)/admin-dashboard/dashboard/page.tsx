@@ -1,5 +1,5 @@
-import Sidebar from "../../../components/Sidebar";
-import DashboardBody from "../../../components/AdminDash";
+import Sidebar from "../components/Sidebar";
+import DashboardBody from "../components/AdminDash";
 
 export default function DashboardPage() {
   return (
