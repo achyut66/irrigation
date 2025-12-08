@@ -19,9 +19,13 @@ export default function LoginPage() {
   
     try {
       // STEP 1: Get CSRF cookie
-      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
-        method: "GET",
-        credentials: "include",
+      // await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`, {
+      //   method: "GET",
+      //   credentials: "include",
+      // });
+      await fetch('https://api.rwashmb.com/sanctum/csrf-cookie', {
+        method: 'GET',
+        credentials: 'include'
       });
   
       // STEP 2: Read the XSRF token
@@ -29,14 +33,22 @@ export default function LoginPage() {
       const decodedToken = xsrf ? decodeURIComponent(xsrf) : "";
   
       // STEP 3: Login request
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
-        method: "POST",
-        credentials: "include",
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
+      //   method: "POST",
+      //   credentials: "include",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "X-XSRF-TOKEN": decodedToken,
+      //   },
+      //   body: JSON.stringify({ email, password }),
+      // });
+      const res = await fetch('https://api.rwashmb.com/api/login', {
+        method: 'POST',
+        credentials: 'include',
         headers: {
-          "Content-Type": "application/json",
-          "X-XSRF-TOKEN": decodedToken,
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: 'you@example.com', password: 'secret' })
       });
   
       // STEP 4: Check response
