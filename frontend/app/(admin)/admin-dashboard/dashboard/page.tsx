@@ -22,6 +22,8 @@ export default function DashboardPage() {
           credentials: "include",
         });
 
+        console.log(res);
+
         const data = await res.json().catch(() => null);
 
         // If data is null or missing user → not authenticated
