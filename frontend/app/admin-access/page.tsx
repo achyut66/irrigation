@@ -42,7 +42,7 @@ export default function LoginPage() {
       //   },
       //   body: JSON.stringify({ email, password }),
       // });
-      const res = await fetch('https://api.rwashmb.com/api/login', {
+      const res = await fetch('https://api.rwashmb.com/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
