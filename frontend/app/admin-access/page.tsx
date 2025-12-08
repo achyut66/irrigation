@@ -12,18 +12,19 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // 🔥 STOP PAGE REFRESH
     setLoading(true);
     setError("");
 
     try {
-      // 🔥 STEP 1: GET CSRF COOKIE (MUST BE FIRST)
+      // 1️⃣ GET CSRF COOKIE
       await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
         method: "GET",
-        credentials: "include",   // MUST HAVE
+        credentials: "include",
       });
 
-      // 🔥 STEP 2: READ COOKIE (Laravel sets it automatically)
+      // 2️⃣ READ TOKEN
       const token = getCookie("XSRF-TOKEN");
       if (!token) {
         setError("Unable to get CSRF token");
@@ -31,18 +32,18 @@ export default function LoginPage() {
         return;
       }
 
-      // 🔥 STEP 3: SEND LOGIN REQUEST
+      // 3️⃣ LOGIN
       const res = await fetch("https://api.rwashmb.com/login", {
         method: "POST",
-        credentials: "include",   // VERY IMPORTANT
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          "X-XSRF-TOKEN": decodeURIComponent(token),   // MUST SEND THIS
+          "X-XSRF-TOKEN": decodeURIComponent(token),
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email,
+          password,
         }),
       });
 
@@ -52,9 +53,8 @@ export default function LoginPage() {
         return;
       }
 
-      // 🔥 STEP 4: Redirect on success
+      // 4️⃣ REDIRECT
       router.push("/admin-dashboard/dashboard");
-
     } catch (err) {
       console.error("Login error:", err);
       setError("Something went wrong, please try again.");
@@ -68,43 +68,45 @@ export default function LoginPage() {
       <div className="min-h-20 flex items-center justify-center bg-gray-100 p-4">
         <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-sm">
 
-          <div className="flex justify-center mb-4">
-            <img src="/images/logo.png" className="h-20 w-20" />
-          </div>
-
-          <h1 className="text-xl font-bold text-center mb-6 text-gray-700">
-            Administrator Login
-          </h1>
-
-          {error && (
-            <div className="bg-red-100 text-red-700 p-2 rounded mb-4 text-sm">
-              {error}
+          <form onSubmit={handleLogin}>
+            <div className="flex justify-center mb-4">
+              <img src="/images/logo.png" className="h-20 w-20" />
             </div>
-          )}
 
-          <input
-            placeholder="Email"
-            type="email"
-            className="border p-3 rounded-lg w-full mb-3"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <h1 className="text-xl font-bold text-center mb-6 text-gray-700">
+              Administrator Login
+            </h1>
 
-          <input
-            placeholder="Password"
-            type="password"
-            className="border p-3 rounded-lg w-full mb-4"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            {error && (
+              <div className="bg-red-100 text-red-700 p-2 rounded mb-4 text-sm">
+                {error}
+              </div>
+            )}
 
-          <button
-            onClick={handleLogin}
-            disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 rounded-lg w-full"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
+            <input
+              placeholder="Email"
+              type="email"
+              className="border p-3 rounded-lg w-full mb-3"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              placeholder="Password"
+              type="password"
+              className="border p-3 rounded-lg w-full mb-4"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 rounded-lg w-full"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
         </div>
       </div>
 
