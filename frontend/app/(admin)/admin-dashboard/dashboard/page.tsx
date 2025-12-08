@@ -14,20 +14,25 @@ export default function DashboardPage() {
   useEffect(() => {
     const checkAdmin = async () => {
       try {
-        await fetch(`${API_URL}/sanctum/csrf-cookie`, {
-          method: "GET",
-          credentials: "include",
-        });
+        // ❗ DO NOT fetch csrf-cookie here
+        // Login page only
 
         const res = await fetch(`${API_URL}/api/user`, {
           method: "GET",
           credentials: "include",
         });
 
-        if (!res.ok) return router.replace("/admin-access");
+        const data = await res.json().catch(() => null);
 
-        const data = await res.json();
-        if (!data?.isAdmin) return router.replace("/admin-access");
+        // If data is null or missing user → not authenticated
+        if (!data || !data.id) {
+          return router.replace("/admin-access");
+        }
+
+        // Optional: admin check
+        if (!data.isAdmin) {
+          return router.replace("/admin-access");
+        }
 
         setIsChecking(false);
       } catch (err) {
