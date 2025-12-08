@@ -48,7 +48,7 @@ export default function LoginPage() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: 'you@example.com', password: 'secret' })
+        body: JSON.stringify({ email, password })
       });
   
       // STEP 4: Check response
