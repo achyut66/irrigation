@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <header className="w-full shadow-sm sticky text-white top-0 z-50 relative bg-[#0B2A4A]">
-  <nav className="container mx-auto flex items-center justify-between py-4 px-1">
+  <nav className="container mx-auto max-w-7xl flex items-center justify-between py-4 px-1">
 
     {/* LEFT SIDE (Logo Section) */}
     <div className="flex items-center gap-2">
@@ -58,7 +58,7 @@ export default function Navbar() {
       <div className="text-white font-semibold text-sm md:text-base">
         <p>ज्वालामूखी ग्रामीण खानेपानी,</p>
         <p>सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड</p>
-        <p>ज्वालामुखी, धादिंग</p>
+        <p>ज्वालामुखी, धादिङ </p>
       </div>
     </div>
 

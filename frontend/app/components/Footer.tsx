@@ -27,10 +27,7 @@ export default function Footer() {
                 <p className="text-sm leading-tight">
                   ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड
                 </p>
-                <h4 className="text-lg font-bold leading-tight">
-                  जलस्रोत तथा सिँचाइ विभाग
-                </h4>
-                <p className="text-sm mt-1 leading-tight">ज्वालामुखी, धादिंग</p>
+                <p className="text-sm mt-1 leading-tight">ज्वालामूखी, धादिङ </p>
               </div>
             </div>
 
@@ -135,13 +132,13 @@ export default function Footer() {
         {/* Contact Bottom Section */}
         <div className="mt-10 border-t border-gray-600 pt-5 flex flex-col md:flex-row justify-between gap-5">
           <ul className="text-sm space-y-1">
-            <li className="flex gap-2">📍 ज्वालामुखी, धादिंग</li>
+            <li className="flex gap-2">📍 ज्वालामूखी, धादिङ </li>
             <li className="flex gap-2">✉ jwalamukhi.rwashmb@gmail.com</li>
           </ul>
         </div>
 
         <div className="text-center text-xs text-gray-400 mt-6 pb-4">
-          © <span suppressHydrationWarning>{new Date().getFullYear()}</span> ज्वालामुखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड।
+          © <span suppressHydrationWarning>{new Date().getFullYear()}</span> ज्वालामूखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड।
         </div>
       </div>
     </footer>

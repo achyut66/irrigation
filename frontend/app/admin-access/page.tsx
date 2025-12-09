@@ -16,10 +16,10 @@ export default function LoginPage() {
     e.preventDefault(); // 🔥 STOP PAGE REFRESH
     setLoading(true);
     setError("");
-
+    const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
     try {
       // 1️⃣ GET CSRF COOKIE
-      await fetch("https://api.rwashmb.com/sanctum/csrf-cookie", {
+      await fetch(`${API_URL}/sanctum/csrf-cookie`, {
         method: "GET",
         credentials: "include",
       });
@@ -33,7 +33,7 @@ export default function LoginPage() {
       }
 
       // 3️⃣ LOGIN
-      const res = await fetch("https://api.rwashmb.com/login", {
+      const res = await fetch(`${API_URL}/login`, {
         method: "POST",
         credentials: "include",
         headers: {

@@ -110,10 +110,10 @@ export default function ContactUsPage() {
           <div className="mt-10">
             <h2 className="text-xl font-bold text-gray-800 mb-3">सम्पर्क विवरण</h2>
             <p className="text-gray-700 mb-2">
-              <strong>ठेगाना:</strong> ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड, ज्वालामुखी धादिंग
+              <strong>ठेगाना:</strong> ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड, ज्वालामूखी धादिङ 
             </p>
             <p className="text-gray-700 mb-2">
-              <strong>फोन:</strong> ९८४१०६४४६१
+              <strong>फोन:</strong> ९७७-९८४१०६४४६१
             </p>
             <p className="text-gray-700 mb-2">
               <strong>ईमेल:</strong> jwalamukhi.rwashmb@gmail.com
