@@ -58,7 +58,7 @@ export default function Navbar() {
       <div className="text-white font-semibold text-sm md:text-base">
         <p>ज्वालामूखी ग्रामीण खानेपानी,</p>
         <p>सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड</p>
-        <p>ज्वालामुखी, धादिङ </p>
+        <p>ज्वालामूखी, धादिङ </p>
       </div>
     </div>
 
