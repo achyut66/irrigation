@@ -40,86 +40,48 @@ export default function ContactUsPage() {
       <div className="grid md:grid-cols-2 gap-10 mt-10">
 
         {/* LEFT: Contact Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded-xl p-6 md:p-10 h-fit"
-        >
-          {/* Full Name */}
-          <div className="mb-5">
-            <label className="block text-gray-700 font-medium mb-2">पुरा नाम</label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="तपाईंको नाम"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          {/*  */}
-          {/* Email */}
-          <div className="mb-5">
-            <label className="block text-gray-700 font-medium mb-2">ईमेल</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="example@gmail.com"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-            />
+        <div className="bg-white shadow-md rounded-xl p-6 md:p-10 h-fit">
+  
+          {/* Intro Text */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-3">हामीसँग सम्पर्क गर्नुहोस्</h2>
+
+            <p> हामी तपाईंको जानकारी संकलन गर्ने प्रक्रियालाई अझ सहज र व्यवस्थित बनाउन चाहन्छौँ। त्यसका लागि तलको <strong>Google Form</strong>
+            मार्फत आवश्यक विवरणहरू पठाउन सकिने व्यवस्था गरिएको छ। कृपया फारममा मागिएका सबै विवरणहरू ध्यानपूर्वक भरि पठाइदिनुहोस्, जसले गर्दा 
+            हामीले तपाईंको जानकारीलाई छिटो र प्रभावकारी ढङ्गले प्रक्रिया गर्न सक्छौँ। </p> 
+            <p> यो प्रणालीमार्फत पठाइने सबै जानकारी सुरक्षित रहन्छ र केवल सम्बन्धित व्यवस्थापन कार्यका लागि मात्र प्रयोग गरिनेछ। तपाईंले पठाएको विवरणको 
+            आधारमा हामी आवश्यक प्रमाणीकरण, अभिलेख व्यवस्थापन तथा अन्य आवश्यक प्रशासकीय कार्यहरू सम्पन्न गर्नेछौँ। यदि तपाईंले फारम भर्दा कुनै 
+            समस्या वा अस्पष्टता महसुस गर्नुभयो भने, हामीलाई सम्पर्क गर्न सक्नुहुन्छ। </p> <p> कृपया तल दिइएको लिंकमा क्लिक गरी Google Form खोल्नुहोस्
+            र सबै चरण पूरा गर्नुहोस्। फारम सफलतापूर्वक बुझाइएपछि तपाईंलाई पुष्टि सन्देश पनि प्राप्त हुनेछ। </p> 
+            <p className="font-semibold"> धन्यवाद — तपाईंको सहयोगले सेवा प्रवाहलाई अझ सरल र प्रभावकारी बनाउन मद्दत गर्छ। </p>
+
+            {/* Google Form Button */}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSf..." 
+              target="_blank"
+              className="inline-block mt-5 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition"
+            >
+              Google Form भर्नुहोस्
+            </a>
           </div>
 
-          {/* Phone */}
-          <div className="mb-5">
-            <label className="block text-gray-700 font-medium mb-2">फोन नम्बर</label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="98XXXXXXXX"
-              className="w-full p-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          {/* Message */}
-          <div className="mb-5">
-            <label className="block text-gray-700 font-medium mb-2">संदेश</label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="यहाँ आफ्नो संदेश लेख्नुहोस्..."
-              rows={4}
-              required
-              className="w-full p-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition"
-          >
-            पठाउनुहोस्
-          </button>
-
-          {/* Contact Info */}
+          {/* Contact Information */}
           <div className="mt-10">
             <h2 className="text-xl font-bold text-gray-800 mb-3">सम्पर्क विवरण</h2>
+
             <p className="text-gray-700 mb-2">
-              <strong>ठेगाना:</strong> ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बाेर्ड, ज्वालामूखी धादिङ 
+              <strong>ठेगाना:</strong> ज्वालामूखी ग्रामीण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड, ज्वालामूखी, धादिङ
             </p>
+
             <p className="text-gray-700 mb-2">
               <strong>फोन:</strong> ९७७-९८४१०६४४६१
             </p>
+
             <p className="text-gray-700 mb-2">
               <strong>ईमेल:</strong> jwalamukhi.rwashmb@gmail.com
             </p>
           </div>
-        </form>
+        </div>
 
         {/* RIGHT: Google Map */}
         <div className="w-full h-[600px] md:h-full rounded-xl overflow-hidden shadow-md">

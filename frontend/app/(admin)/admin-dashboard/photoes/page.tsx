@@ -176,7 +176,18 @@ export default function NewsUpdate() {
     }
   };
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+
+  const currentItems = newsList.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(newsList.length / itemsPerPage);
+
   return (
+    <main className="ml-60 w-full h-screen max-w-7xl p-6">
     <div className="flex min-h-screen">
       <Sidebar onLogout={() => {}} />
 
@@ -248,7 +259,7 @@ export default function NewsUpdate() {
           </thead>
 
           <tbody>
-            {newsList.map((item) => (
+            {currentItems.map((item) => (
               <tr key={item.id} className="border-t">
                 <td className="p-3">
                   {item.image_url ? (
@@ -282,6 +293,38 @@ export default function NewsUpdate() {
             ))}
           </tbody>
         </table>
+        {/* pagination */}
+
+        <div className="flex items-center justify-center mt-6 gap-2">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className={`px-4 py-2 rounded-md border
+              ${currentPage === 1 ? "bg-gray-200 cursor-not-allowed" : "bg-white hover:bg-gray-100"}`}
+          >
+            Previous
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 rounded-md border 
+                ${currentPage === i + 1 ? "bg-blue-600 text-white" : "bg-white hover:bg-gray-100"}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className={`px-4 py-2 rounded-md border
+              ${currentPage === totalPages ? "bg-gray-200 cursor-not-allowed" : "bg-white hover:bg-gray-100"}`}
+          >
+            Next
+          </button>
+        </div>
 
         {/* EDIT MODAL (Optional) */}
         {editItem && (
@@ -302,5 +345,6 @@ export default function NewsUpdate() {
         )}
       </div>
     </div>
+    </main>
   );
 }

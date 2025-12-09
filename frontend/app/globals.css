@@ -1,5 +1,51 @@
 @import "tailwindcss";
 
+
+/* Allow both modes, but don't let browser auto-style them */
+html {
+  color-scheme: light dark;
+}
+
+/* Default Light Mode */
+body {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+/* Global Dark Mode Base */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #111111;
+    color: #e5e5e5;
+  }
+
+  a {
+    color: #9ecbff;
+  }
+
+  /* Fix elements that break in dark mode */
+  * {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .navbar {
+    background: #181818;
+  }
+
+  .footer {
+    background: #121212;
+  }
+}
+
+/* html, body {
+  overflow: hidden;
+} */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

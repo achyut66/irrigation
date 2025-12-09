@@ -63,9 +63,13 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <>
+    <div className="flex bg-gray-100">
       <Sidebar onLogout={handleLogout} />
-      <DashboardBody />
+      <main className="ml-66 w-full h-screen p-6">
+        <DashboardBody />
+      </main>
     </div>
+    </>
   );
 }
