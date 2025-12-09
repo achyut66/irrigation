@@ -1,7 +1,8 @@
+
+
 "use client"
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
 import Footer from "../../components/Footer";
 
 type PlanItem = {

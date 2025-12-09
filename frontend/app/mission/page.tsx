@@ -1,3 +1,9 @@
+
+export const metadata = {
+  title: "हाम्रो उदेश्य - ज्वालामूखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड",
+  description: "ज्वालामूखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड",
+};
+
 import StickyLayout from "../components/StickeyLayout";
 import Footer from "../components/Footer";
 

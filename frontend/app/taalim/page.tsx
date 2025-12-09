@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "तालिम तथा कार्यशाला - ज्वालामूखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड",
+  description: "ज्वालामूखी ग्रामिण खानेपानी, सरसफाई तथा स्वच्छता व्यवस्थापन बोर्ड",
+};
+
 import Image from "next/image";
 import Footer from "../components/Footer";
 
