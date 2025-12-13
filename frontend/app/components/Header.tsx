@@ -20,6 +20,12 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
   const [results, setResults] = useState<any | null>(null);
   const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
+  // mobile nav
+
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+
+
   // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -121,7 +127,8 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
           )}
 
           {/* MENU ITEMS */}
-          <div className="flex space-x-8 text-lg font-medium font-sans relative">
+          {/* <div className="flex space-x-8 text-lg font-medium font-sans relative"> */}
+          <div className="hidden md:flex space-x-8 text-lg font-medium font-sans relative">
             {menus.map((item) => {
               const isActive = pathname === item.path;
               const hasSubmenu = submenu[item.path];
@@ -181,16 +188,6 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
 
         {/* RIGHT SECTION */}
         <div className="flex items-center space-x-3">
-
-          {/* SEARCH */}
-          {/* <div className="flex items-center bg-transparent border border-gray-300 rounded-full px-3 py-1.5">
-            <Search className="w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="खोज्नुहोस..."
-              className="bg-transparent outline-none ml-2 placeholder-gray-500 text-gray-700"
-            />
-          </div> */}
           <div className="relative">
             <div className="flex items-center bg-transparent border border-gray-300 rounded-full px-3 py-1.5">
               <Search className="w-5 h-5 text-gray-500" />
@@ -274,44 +271,75 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
               </div>
             )}
           </div>
-
-
-          {/* LANGUAGE DROPDOWN */}
-          {/* <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setOpen(!open)}
-              className="px-4 py-2 border rounded bg-white hover:bg-gray-100"
-            >
-              {lang}
-            </button>
-
-            {open && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg border border-gray-300 w-32 py-2 z-50">
-                <button
-                  onClick={() => changeLanguage("EN")}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  English
-                </button>
-                <button
-                  onClick={() => changeLanguage("NP")}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Nepali
-                </button>
-              </div>
-            )}
-          </div> */}
-          {/* <div id="google_translate_element" className="ml-4"></div> */}
-          {/* भाषा:<div id="google_translate_element" className="ml-4 h-[32px] w-[50px] flex items-center overflow-hidden"></div> */}
-
         </div>
+
+        {/* mobile hamburger */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden p-2 rounded-lg hover:bg-gray-200"
+        >
+          <span className="block w-6 h-0.5 bg-gray-700 mb-1"></span>
+          <span className="block w-6 h-0.5 bg-gray-700 mb-1"></span>
+          <span className="block w-6 h-0.5 bg-gray-700"></span>
+        </button>
 
         <div className="relative">
           <div id="google_translate_element" className="google-translate-btn relative" />
         </div>
 
       </div>
+      {/* mobile sub-menu */}
+      {/* MOBILE MENU */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t shadow-lg">
+          <div className="flex flex-col px-6 py-4 space-y-4">
+
+            {menus.map((item) => {
+              const hasSubmenu = submenu[item.path];
+              const isOpen = mobileSubmenu === item.path;
+
+              return (
+                <div key={item.path}>
+                  <div
+                    className="flex justify-between items-center text-gray-800 font-medium"
+                    onClick={() =>
+                      hasSubmenu
+                        ? setMobileSubmenu(isOpen ? null : item.path)
+                        : setMobileOpen(false)
+                    }
+                  >
+                    <Link href={item.path}>{item.name}</Link>
+                    {hasSubmenu && (
+                      <ChevronDown
+                        size={18}
+                        className={`transition ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    )}
+                  </div>
+
+                  {/* MOBILE SUBMENU */}
+                  {hasSubmenu && isOpen && (
+                    <div className="ml-4 mt-2 space-y-2">
+                      {submenu[item.path].map((sub) => (
+                        <Link
+                          key={sub.path}
+                          href={sub.path}
+                          onClick={() => setMobileOpen(false)}
+                          className="block text-gray-600"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+          </div>
+        </div>
+      )}
+
     </nav>
   );
 }

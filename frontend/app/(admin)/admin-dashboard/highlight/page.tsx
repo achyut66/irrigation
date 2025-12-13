@@ -17,7 +17,7 @@ const resolveApiUrl = () => {
     return process.env.NEXT_PUBLIC_BACKEND_URL;
   }
 
-  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+  if (window.location.hostname === "localhost") {
     return "http://localhost:8000";
   }
 
