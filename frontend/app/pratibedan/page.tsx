@@ -54,7 +54,7 @@ export default function PratibedanPage() {
       <div className="w-full min-h-screen bg-gray-50 py-6">
         {/* Header */}
         <div className="max-w-7xl mx-auto px-4 text-left mb-12">
-          <h1 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
+          <h1 className="text-3xl text-gray-600 md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
             प्रतिवेदन
           </h1>
           <p className="text-gray-700 text-lg">
@@ -81,7 +81,7 @@ export default function PratibedanPage() {
             
 
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-blue-600 mb-2">
+                <h3 className="text-xl font-semibold text-gray-600 mb-2 hover:text-blue-500 hover:underline">
                   {report.title}
                 </h3>
 

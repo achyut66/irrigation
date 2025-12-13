@@ -1,9 +1,9 @@
 export default function MissionSection() {
     return (
-      <section className="py-4 px-6 max-w-9xl ml-6 md:px-12 lg:px-20">
+      <section className="py-4 px-6 max-w-7xl ml-6 md:px-12 lg:px-20">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* LEFT IMAGE */}
-          <div className="w-full">
+          <div className="w-full ml-[35px]">
             <img
               src="../images/irrigation.jpg" // change image file path
               alt="Our Mission"
@@ -12,7 +12,7 @@ export default function MissionSection() {
           </div>
   
           {/* RIGHT CONTENT */}
-          <div>
+          <div className="ml-[27px] min-w-2xl">
   {/* Heading */}
   <h2 className="text-3xl text-left text-gray-500 font-bold mb-12 border-b-4 border-blue-500 inline-block pb-1">
   हाम्रो उद्देश्य

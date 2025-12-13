@@ -37,7 +37,7 @@ export default function AllHighlights() {
   return (
     <>
     <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold mb-8 border-l-4 border-blue-600 pl-3">
+      <h1 className="text-3xl font-bold mb-8 border-l-4 text-gray-600 border-blue-600 pl-3">
         All Highlights (सबै सूचना / हाईलाइट)
       </h1>
 
@@ -56,9 +56,12 @@ export default function AllHighlights() {
             )}
 
             <h2 className="text-lg font-bold mb-2">
-              <Link href={`/highlightnews/${item.id}`} className="hover:text-blue-600">
+            <Link href={`/highlightnews/${item.id}`} className="hover:text-blue-600">
+              <span className="text-gray-600">
                 {item.title}
-              </Link>
+              </span>
+            </Link>
+
             </h2>
 
             <p className="text-sm text-gray-500">

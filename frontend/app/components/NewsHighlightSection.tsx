@@ -76,7 +76,7 @@ export default function HighlightAndNews() {
 
     {/* LEFT — HIGHLIGHTS */}
     <div>
-      <h2 className="text-2xl md:text-3xl text-gray-500 font-bold mb-6 border-l-4 border-blue-600 pl-3">
+      <h2 className="text-2xl md:text-3xl text-gray-600 font-bold mb-6 border-l-4 border-blue-600 pl-3">
         Highlights (सूचना / हाईलाइट)
       </h2>
 
@@ -84,19 +84,22 @@ export default function HighlightAndNews() {
         {highlights.map((item) => (
           <li
             key={item.id}
-            className="p-4 rounded-xl shadow-xl bg-white"
+            className="p-4 rounded-xl shadow-xl bg-gray-100"
           >
             {/* Title */}
             <Link
               href={`/highlightnews/${item.id}`}
-              className="text-lg font-bold hover:underline hover:text-blue-600"
+              className="hover:underline hover:text-blue-600"
             >
-              {item.title}
+              <span className="text-lg font-bold text-gray-600 hover:text-blue-600 hover:underline">
+                {item.title}
+              </span>
             </Link>
+
 
             {/* DATE */}
             {item.created_at && (
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs text-gray-600 mt-2">
                 {new Date(item.created_at).toLocaleString()}
               </p>
             )}
@@ -107,7 +110,7 @@ export default function HighlightAndNews() {
 
     {/* RIGHT — NEWS */}
     <div>
-  <h2 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 text-gray-500 border-blue-600 pl-3">
+  <h2 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 text-gray-600 border-blue-600 pl-3">
     Latest News (ताजा समाचार)
   </h2>
 
@@ -115,7 +118,7 @@ export default function HighlightAndNews() {
     {news.map((item) => (
       <li
         key={item.id}
-        className="p-4 rounded-xl shadow-xl bg-white flex gap-4"
+        className="p-4 rounded-xl shadow-xl bg-gray-100 flex gap-4"
       >
         {/* IMAGE SMALL */}
         {item.image_url && (
@@ -128,12 +131,20 @@ export default function HighlightAndNews() {
 
         {/* RIGHT SIDE: TEXT */}
         <div className="flex flex-col justify-center">
-          <Link
+          {/* <Link
             href={`/news/${item.id}`}
-            className="text-lg font-semibold hover:text-blue-600 hover:underline"
+            className="text-lg font-semibold hover:text-blue-600 text-gray-600 hover:underline"
           >
             {item.heading}
-          </Link>
+          </Link> */}
+          <Link
+              href={`/highlightnews/${item.id}`}
+              className="hover:underline hover:text-blue-600"
+            >
+              <span className="text-lg font-bold text-gray-600 hover:text-blue-600 hover:underline">
+                {item.heading}
+              </span>
+            </Link>
 
           {item.created_at && (
             <p className="text-xs text-gray-500 mt-1">

@@ -26,9 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ne">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-
+    <html lang="ne" className="bg-gray-100">
+  <body
+  className={`${geistSans.variable} ${geistMono.variable} antialiased text-gray-800`}
+>
         {/* 🌐 Inject Google Translate Init Function */}
         <Script id="google-translate-init" strategy="beforeInteractive">
           {`
@@ -54,7 +55,9 @@ export default function RootLayout({
         {/* 🔥 Your Application */}
         <LanguageProvider>
           <StickyLayoutGuard />
+          <div className="min-h-screen bg-gray-100">
           {children}
+          </div>
         </LanguageProvider>
 
       </body>

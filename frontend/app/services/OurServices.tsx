@@ -71,12 +71,12 @@ export default function ServicesAndTeam() {
                   className="w-20 h-20 rounded-lg object-cover"
                 />
                 <div>
-                  <h5 className="text-lg font-semibold">{member.full_name}</h5>
+                  <h5 className="text-lg font-semibold text-gray-600">{member.full_name}</h5>
                   <p className="text-sm text-gray-600">{member.position}</p>
 
                   <div className="flex items-center gap-4 mt-2">
-                    <p className="text-sm">📞 {member.mobile_no}</p>
-                    <p className="text-sm">✉️ {member.email}</p>
+                    <p className="text-sm text-gray-600">📞 {member.mobile_no}</p>
+                    <p className="text-sm text-gray-600">✉️ {member.email}</p>
                   </div>
                 </div>
 

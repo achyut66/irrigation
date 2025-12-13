@@ -56,7 +56,7 @@ export default function PlansPage() {
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Title */}
-        <h2 className="text-3xl font-bold mb-10 border-l-4 border-blue-600 pl-4">
+        <h2 className="text-3xl font-bold mb-10 border-l-4 border-blue-600 pl-4 text-gray-600">
           बोर्ड आयोजनाहरू
         </h2>
 
@@ -103,8 +103,9 @@ export default function PlansPage() {
           </div>
         )}
       </div>
-    </div>
     <Footer/>
+
+    </div>
     </>
   );
 }

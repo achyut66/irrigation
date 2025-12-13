@@ -36,7 +36,7 @@ export default function PhotoGalleryPage() {
 
         {/* Header */}
         <div className="text-left mb-12">
-          <h1 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
+          <h1 className="text-2xl md:text-3xl text-gray-600 font-bold mb-6 border-l-4 border-blue-600 pl-3">
             फोटो ग्यालेरी
           </h1>
           <p className="text-gray-700 max-w-7xl">

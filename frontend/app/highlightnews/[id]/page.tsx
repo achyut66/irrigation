@@ -32,7 +32,7 @@ interface HighlightDetailProps {
        <div className="p-6 max-w-7xl mx-auto space-y-10">
     {/* TOP — LATEST HIGHLIGHTS */}
         <div>
-          <h2 className="text-xl font-bold border-l-4 border-blue-600 pl-3 mb-4">
+          <h2 className="text-3xl font-bold border-l-4 border-blue-600 text-gray-600 pl-3 mb-4">
             Latest Highlights
           </h2>
 
@@ -63,13 +63,13 @@ interface HighlightDetailProps {
             />
           )}
 
-          <h1 className="text-3xl font-bold">{data.title}</h1>
+          <h1 className="text-2xl font-bold text-gray-600">{data.title}</h1>
 
           <p className="text-gray-500 text-sm mt-1">
             {new Date(data.created_at).toLocaleString()}
           </p>
 
-          <p className="mt-6">{data.highlight_news}</p>
+          <p className="mt-6 text-gray-600">{data.highlight_news}</p>
         </div>
         </div>
         <Footer />

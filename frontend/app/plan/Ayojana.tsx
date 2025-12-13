@@ -52,7 +52,7 @@ export default function NationalProjects() {
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Section Title */}
-        <h2 className="text-2xl text-gray-500 md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
+        <h2 className="text-2xl text-gray-600 md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
           बोर्डस्तर गौरवका आयोजनाहरू
         </h2>
 
@@ -71,7 +71,7 @@ export default function NationalProjects() {
 
                 {/* Title */}
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold hover:text-blue-600">
+                  <h3 className="text-lg font-semibold hover:text-blue-600 text-gray-600">
                     {p.title}
                   </h3>
                 </div>

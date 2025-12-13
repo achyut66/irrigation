@@ -35,9 +35,9 @@ export default function GalleryPageClient({ id }: { id: string }) {
 
   return (
     <>
-    <section className="py-12 bg-gray-50 min-h-screen">
+    <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3 text-gray-600">
           {gallery.title}
         </h2>
 

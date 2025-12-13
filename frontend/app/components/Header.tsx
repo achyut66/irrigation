@@ -111,7 +111,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
 
   
   return (
-    <nav className="w-full bg-gray-100 shadow-sm">
+    <nav className="w-full bg-gray-100 shadow-sm text-gray-800">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
 
         {/* LEFT SECTION */}
@@ -128,7 +128,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
 
           {/* MENU ITEMS */}
           {/* <div className="flex space-x-8 text-lg font-medium font-sans relative"> */}
-          <div className="hidden md:flex space-x-8 text-lg font-medium font-sans relative">
+          <div className="hidden md:flex space-x-8 text-lg font-medium text-gray-800 font-sans relative">
             {menus.map((item) => {
               const isActive = pathname === item.path;
               const hasSubmenu = submenu[item.path];
