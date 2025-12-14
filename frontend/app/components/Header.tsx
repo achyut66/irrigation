@@ -195,8 +195,9 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
               <Search className="w-5 h-5 text-gray-500" />
               <input
                 type="text"
+                id="search"
                 placeholder="खोज्नुहोस..."
-                className="bg-transparent outline-none ml-2 placeholder-gray-500 text-gray-700"
+                className="bg-gray-600 ml-2 placeholder-gray-200"
                 value={search}
                 onChange={handleSearch}
               />

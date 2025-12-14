@@ -1,17 +1,58 @@
 @import "tailwindcss";
 
+/* ======================================================
+   BASE RESET (SAFE FOR ALL BROWSERS)
+====================================================== */
 
-/* Allow both modes, but don't let browser auto-style them */
-html {
-  color-scheme: light dark;
-}
-
-/* Default Light Mode */
+html,
 body {
-  background: #ffffff;
-  color: #1a1a1a;
+  background-color: #f3f4f6; /* Tailwind gray-100 */
+  width: 100%;
+  overflow-x: hidden;
 }
-/* Global Dark Mode Base */
+
+/* IMPORTANT:
+   DO NOT use: color-scheme: light dark
+   Chrome breaks native form controls
+*/
+
+/* ======================================================
+   THEME VARIABLES
+====================================================== */
+
+/* ================================
+   INPUT VISIBILITY FIX (CRITICAL)
+================================ */
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ======================================================
+   BODY (SINGLE SOURCE OF TRUTH)
+====================================================== */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: env(safe-area-inset-top);
+}
+
+/* ======================================================
+   DARK MODE BASE STYLES
+====================================================== */
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #111111;
@@ -22,15 +63,13 @@ body {
     color: #9ecbff;
   }
 
-  /* Fix elements that break in dark mode */
   * {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(253, 250, 250, 0.955);
   }
-}
-@media (prefers-color-scheme: dark) {
+
   .card {
     background: #1a1a1a;
-    color: white;
+    color: #ffffff;
   }
 
   .navbar {
@@ -42,36 +81,50 @@ body {
   }
 }
 
-/* html, body {
-  overflow: hidden;
-} */
+/* ======================================================
+   FORM ELEMENT FIX (CRITICAL FOR CHROME)
+====================================================== */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+input,
+select,
+textarea {
+  background-color: #f3f4f6;
+  color: #111827 !important; /* gray-900 */
+  opacity: 1 !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-text-fill-color: #111827 !important;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+option {
+  background-color: #ffffff !important;
+  color: #111827 !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Remove Chrome auto styling */
+select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ======================================================
+   LINKS
+====================================================== */
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* news and articles */
+/* ======================================================
+   ANIMATIONS
+====================================================== */
+
+/* News ticker animation */
 @keyframes slide {
   0% {
     transform: translateY(100%);
@@ -91,38 +144,54 @@ body {
   animation: slide 3s ease-in-out;
 }
 
+/* Fade-in animation */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
 
-/* google translate */
+/* ======================================================
+   GOOGLE TRANSLATE FIX (NO LAYOUT SHIFT)
+====================================================== */
 
-/* Hide TOP Google bar */
-.goog-te-banner-frame.skiptranslate {
+/* Hide Google top bar */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate {
   display: none !important;
 }
 
+/* Prevent body jump */
 body {
   top: 0 !important;
 }
 
-/* Do NOT hide the widget */
+/* Keep widget visible */
 .goog-te-gadget {
   font-family: inherit !important;
+  font-size: 0 !important;
 }
 
-.goog-te-gadget span {
+/* Hide internal text */
+.goog-te-gadget span,
+.goog-logo-link,
+.goog-te-gadget span a {
   display: none !important;
 }
 
-/* Style the dropdown */
+/* Style dropdown */
 .goog-te-combo {
-  background: white !important;
+  background: #ffffff !important;
   border: 1px solid #d1d5db !important;
   padding: 6px 12px !important;
   border-radius: 6px !important;
@@ -131,64 +200,32 @@ body {
   cursor: pointer !important;
   font-weight: 500 !important;
   outline: none !important;
+  -webkit-appearance: none !important;
   appearance: none !important;
 }
 
-/* Hide "द्वारा सञ्चालित" (Powered by Google) */
-.goog-logo-link,
-.goog-te-gadget span a {
-  display: none !important;
-}
-
-/* Hide remaining text container */
-.goog-te-gadget span {
-  display: none !important;
-}
-
-/* Remove extra spacing left behind */
-.goog-te-gadget {
-  font-size: 0 !important;
-}
-
-/* 🔥 Hide Google Translate Top Bar Frame */
-body > .skiptranslate,
-.goog-te-banner-frame,
-.goog-te-banner-frame.skiptranslate {
-  display: none !important;
-}
-
-/* Fix body shifting because Google injects padding-top */
-body {
-  top: 0 !important;
-}
-
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
-  color: inherit;
-  text-decoration: none;
-}
+/* Force color inheritance */
 .goog-te-gadget *,
 .goog-te-menu-value *,
 font {
   color: inherit !important;
 }
 
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
+/* 🔍 Search input override ONLY */
+#search {
+  background-color: transparent;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-body {
-  padding-top: env(safe-area-inset-top);
+/* Remove focus styles */
+#search:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-
-
-
-
-
-
+/* ======================================================
+   END OF FILE
+====================================================== */

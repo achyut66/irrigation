@@ -206,8 +206,8 @@ export default function ReportPage() {
   const totalPages = Math.ceil(reports.length / itemsPerPage);
 
   return (
-    <main className="ml-60 w-full h-screen max-w-7xl p-6">
-    <div className="flex min-h-screen">
+    <main className="ml-60 w-full h-screen max-w-7xl p-6 text-gray-600">
+    <div className="flex min-h-screen bg-gray-100">
       <Sidebar onLogout={() => {}} />
 
       <div className="flex-1 p-8">

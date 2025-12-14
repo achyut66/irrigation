@@ -85,7 +85,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
           onClick={() => toggleMenu("dashboard")}
           className="flex justify-between w-full p-3 rounded-lg hover:bg-gray-200"
         >
-          <span className="flex items-center space-x-2">
+          <span className="flex items-center space-x-2 text-gray-700">
             <BarChart2 size={18} />
             <span>Dashboard</span>
           </span>
@@ -99,19 +99,20 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             ${isDataMenuActive ? "bg-blue-100 text-blue-700" : "hover:bg-gray-200"}
           `}
         >
-          <span className="flex items-center space-x-2">
+          <span className="flex items-center space-x-2 text-gray-700">
             <Database size={18} />
             <span>Home Page Data</span>
           </span>
-
+          <span className="text-gray-700">
           {openMenu === "data" ? <ChevronDown /> : <ChevronRight />}
+          </span>
         </button>
 
 
         {openMenu === "data" && (
           <div className="ml-8 mt-1 space-y-1">
           <Link href="/admin-dashboard/news-update">
-            <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+            <p className={`text-sm py-2 text-gray-700 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/news-update")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -123,7 +124,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
           </Link>
         
           <Link href="/admin-dashboard/banner">
-          <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+          <p className={`text-sm text-gray-700 py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/banner")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -134,7 +135,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             </p>
           </Link>
           <Link href="/admin-dashboard/authority-personnel">
-          <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+          <p className={`text-sm py-2 px-3 text-gray-700 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/authority-personnel")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -145,7 +146,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             </p>
           </Link>
           <Link href="/admin-dashboard/plan-program">
-          <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+          <p className={`text-sm py-2 text-gray-700 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/plan-program")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -156,7 +157,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             </p>
           </Link>
           <Link href="/admin-dashboard/highlight">
-          <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+          <p className={`text-sm py-2 text-gray-700 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/highlight")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -167,7 +168,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             </p>
           </Link>
           <Link href="/admin-dashboard/photoes">
-          <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+          <p className={`text-sm py-2 px-3 text-gray-700 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/photoes")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -188,12 +189,13 @@ export default function Sidebar({ onLogout }: SidebarProps) {
           ${isSettingsMenuActive ? "bg-blue-100 text-blue-700" : "hover:bg-gray-200"}
         `}
       >
-        <span className="flex items-center space-x-2">
+        <span className="flex items-center space-x-2 text-gray-700">
           <Settings size={18} />
           <span>Menu Data</span>
         </span>
-
+        <span className="text-gray-700">
         {openMenu === "settings" ? <ChevronDown /> : <ChevronRight />}
+        </span>
       </button>
 
 
@@ -201,7 +203,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
         {openMenu === "settings" && (
           <div className="ml-8 mt-1 space-y-1">
             <Link href="/admin-dashboard/report">
-            <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+            <p className={`text-sm text-gray-700 py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/report")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
@@ -213,7 +215,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
             </Link>
 
             <Link href="/admin-dashboard/laws-rules">
-            <p className={`text-sm py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
+            <p className={`text-sm text-gray-700 py-2 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/laws-rules")
                 ? "bg-blue-100 text-blue-700 border-blue-500"
                 : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"

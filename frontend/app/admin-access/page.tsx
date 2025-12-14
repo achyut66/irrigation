@@ -86,7 +86,7 @@ export default function LoginPage() {
             <input
               placeholder="Email"
               type="email"
-              className="border p-3 rounded-lg w-full mb-3"
+              className="border p-4 rounded-lg w-full mb-3"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

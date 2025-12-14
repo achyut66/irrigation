@@ -243,19 +243,19 @@ export default function NewsUpdate() {
 
   return (
     <>
-    <main className="ml-60 w-full h-screen max-w-7xl p-6">
-    <div className="flex min-h-screen">
+    <main className="ml-60 w-full h-screen max-w-7xl p-6 bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100">
       <Sidebar onLogout={handleLogout} />
 
       {/* MAIN CONTENT */}
       <div className="flex-1 p-8">
 
-        <h1 className="text-3xl font-bold mb-6">News Update</h1>
+        <h1 className="text-3xl font-bold mb-6 text-gray-600">News Update</h1>
 
         {/* ---------------- FORM ---------------- */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-xl shadow-md mb-8 w-full max-w-xl"
+          className="bg-white p-6 rounded-xl shadow-md mb-8 w-full max-w-xl text-gray-600"
         >
           <h2 className="text-xl font-semibold mb-4">Add News</h2>
 
@@ -291,7 +291,7 @@ export default function NewsUpdate() {
         </form>
 
         {/* ---------------- TABLE ---------------- */}
-        <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <table className="w-full bg-white shadow-md rounded-lg overflow-hidden text-gray-600">
           <thead className="bg-gray-200">
             <tr>
               <th className="p-3 text-left">Image</th>
@@ -337,7 +337,7 @@ export default function NewsUpdate() {
 
         {/* pagination */}
 
-        <div className="flex items-center justify-center mt-6 gap-2">
+        <div className="flex items-center justify-center mt-6 gap-2 text-gray-600">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(currentPage - 1)}
@@ -370,7 +370,7 @@ export default function NewsUpdate() {
 
         {/* ---------------- EDIT MODAL ---------------- */}
         {editItem && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center text-gray-600">
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
 
               <h2 className="text-xl font-semibold mb-4">Edit News</h2>
