@@ -112,7 +112,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
   
   return (
       // <nav className="sticky top-0 z-50 w-full bg-gray-100 shadow-sm text-gray-800">
-        <nav className="sticky top-0 left-0 right-0 z-50 bg-gray-100 shadow-sm text-gray-800">
+        <nav className="sticky top-0 left-0 right-0 z-50 bg-gray-200 shadow-sm text-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16">
 
 
@@ -124,7 +124,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
             <img
               src="/images/logo.png"
               alt="Logo"
-              className="w-20 h-20 object-contain transition-opacity duration-500"
+              className="w-16 h-16 object-contain transition-opacity duration-500"
             />
           )}
 
@@ -286,7 +286,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
         </button>
 
         <div className="relative">
-          <div id="google_translate_element" className="google-translate-btn relative" />
+          <div id="google_translate_element" className="google-translate-btn relative" suppressHydrationWarning/>
         </div>
 
       </div>
