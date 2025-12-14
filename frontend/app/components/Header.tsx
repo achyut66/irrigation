@@ -111,8 +111,10 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
 
   
   return (
-    <nav className="w-full bg-gray-100 shadow-sm text-gray-800">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+      // <nav className="sticky top-0 z-50 w-full bg-gray-100 shadow-sm text-gray-800">
+        <nav className="sticky top-0 left-0 right-0 z-50 bg-gray-100 shadow-sm text-gray-800">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16">
+
 
         {/* LEFT SECTION */}
         <div className="flex items-center space-x-6">
@@ -276,7 +278,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
         {/* mobile hamburger */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-gray-200"
+          className="md:hidden p-2 rounded-lg hover:bg-gray-200 flex-shrink-0"
         >
           <span className="block w-6 h-0.5 bg-gray-700 mb-1"></span>
           <span className="block w-6 h-0.5 bg-gray-700 mb-1"></span>
@@ -291,9 +293,8 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
       {/* mobile sub-menu */}
       {/* MOBILE MENU */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t shadow-lg">
+          <div className="md:hidden bg-white border-t shadow-lg z-40 relative">
           <div className="flex flex-col px-6 py-4 space-y-4">
-
             {menus.map((item) => {
               const hasSubmenu = submenu[item.path];
               const isOpen = mobileSubmenu === item.path;

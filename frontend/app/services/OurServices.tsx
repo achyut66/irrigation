@@ -23,7 +23,7 @@ export default function ServicesAndTeam() {
   }, [API_URL]);  
 
   return (
-    <div className="w-full py-10">
+    <div className="w-full py-10 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-12 gap-8">
 
         {/* LEFT SIDE */}

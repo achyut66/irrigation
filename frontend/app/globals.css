@@ -176,6 +176,16 @@ font {
   color: inherit !important;
 }
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  padding-top: env(safe-area-inset-top);
+}
+
 
 
 
