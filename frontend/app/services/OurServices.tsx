@@ -35,7 +35,7 @@ export default function ServicesAndTeam() {
           </div>
 
           <div className="shadow-sm rounded-xl border-1 border-blue-100 p-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
               {servicesData.map((item, i) => (
                   <a key={i} href={`/services/${item.id}`} className="group block rounded-lg">
                   <div className="w-full h-40 bg-gray-100 shadow-xl rounded-lg flex items-center justify-center overflow-hidden">
@@ -63,8 +63,8 @@ export default function ServicesAndTeam() {
           )}
 
           {teamData.map((member) => (
-            <div key={member.id} className="rounded-lg p-2 shadow-xl hover:shadow-lg transition max-h-24">
-              <div className="flex gap-4 max-h-20">
+            <div key={member.id} className="rounded-lg p-2 shadow-xl hover:shadow-lg transition max-h-28">
+              <div className="flex gap-4 max-h-40">
                 <img
                   src={member.image_url}
                   alt={member.full_name}

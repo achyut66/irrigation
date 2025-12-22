@@ -55,7 +55,7 @@ export default function PratibedanPage() {
         {/* Header */}
         <div className="max-w-7xl mx-auto px-4 text-left mb-12">
           <h1 className="text-3xl text-gray-600 md:text-3xl font-bold mb-6 border-l-4 border-blue-600 pl-3">
-            प्रतिवेदन
+            योजना तथा कार्यक्रम (प्रतिवेदन)
           </h1>
           <p className="text-gray-700 text-lg">
             ज्वालामुखी ग्रामिण खानेपानी बोर्डमा सम्पन्न विभिन्न कार्यक्रम, परियोजना तथा अन्य

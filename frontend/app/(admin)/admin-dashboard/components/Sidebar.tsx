@@ -145,6 +145,19 @@ export default function Sidebar({ onLogout }: SidebarProps) {
               Authority Personnel
             </p>
           </Link>
+          {/* karyasamiti */}
+          <Link href="/admin-dashboard/karyasamiti">
+          <p className={`text-sm py-2 px-3 text-gray-700 rounded-md border-l-4 cursor-pointer transition-all
+              ${isActive("/admin-dashboard/karyasamiti")
+                ? "bg-blue-100 text-blue-700 border-blue-500"
+                : "hover:bg-blue-100 hover:text-blue-700 hover:border-blue-500 border-transparent"
+              }
+            `}
+          >
+              Karyasamiti Data
+            </p>
+          </Link>
+          {/* ends here */}
           <Link href="/admin-dashboard/plan-program">
           <p className={`text-sm py-2 text-gray-700 px-3 rounded-md border-l-4 cursor-pointer transition-all
               ${isActive("/admin-dashboard/plan-program")
@@ -210,7 +223,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
               }
             `}
           >
-                Report (प्रतिवेदन Upload)
+                योजना/कार्यक्रम (प्रतिवेदन)
               </p>
             </Link>
 
@@ -222,7 +235,7 @@ export default function Sidebar({ onLogout }: SidebarProps) {
               }
             `}
           >
-                 Rules (कानुन / नियम)
+                 कानुन / नियम
               </p>
             </Link>
           </div>

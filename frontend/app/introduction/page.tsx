@@ -11,8 +11,8 @@ import Background from "../components/Background/Background";
 export default function () {
     return (
         <>
-        <Introduction/>
         <Background/>
+        <Introduction/>
         <Footer/>
         </>
     );

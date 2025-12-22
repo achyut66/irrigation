@@ -65,7 +65,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
   const menus = [
     { name: "होमपेज", path: "/home" },
     { name: "हाम्रो बारेमा", path: "/about" },
-    { name: "क्रियाकलाप", path: "/services" },
+    { name: "खानेपानी आयोजना", path: "/plan/allplans" },
     { name: "जानकारीहरु", path: "/information" },
     { name: "फोटो ग्यालरी", path: "/photo-gallery" },
     { name: "सम्पर्क", path: "/contact-us" },
@@ -77,14 +77,14 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
       { name: "पृष्ठभूमि / परिचय", path: "/introduction" },
       { name: "लक्ष्य / उद्देश्य", path: "/mission" },
     ],
-    "/services": [
-      { name: "सिचाइ आयोजना", path: "/plan/allplans" },
-      { name: "तालिम तथा कार्यशाला", path: "/taalim" },
-      { name: "प्राविधिक सहयोग", path: "/technical_support" },
-    ],
+    // "/services": [
+    //   { name: "सिचाइ आयोजना", path: "/plan/allplans" },
+    //   { name: "तालिम तथा कार्यशाला", path: "/taalim" },
+    //   { name: "प्राविधिक सहयोग", path: "/technical_support" },
+    // ],
     "/information": [
       { name: "सूचना", path: "/highlightnews/highlight-page" },
-      { name: "प्रतिवेदन", path: "/pratibedan" },
+      { name: "योजना तथा कार्यक्रम", path: "/pratibedan" },
       { name: "कानुन तथा नीतिहरु", path: "/kanun-niti" },
     ],
   };
@@ -216,7 +216,7 @@ export default function HeaderNav({ scrolled }: NavbarProps) {
                         <p className="py-1 text-gray-700 hover:text-blue-600 cursor-pointer">
                           {item.heading}
                         </p>
-                      </Link>
+                      </Link> 
                     ))}
                   </div>
                 )}
