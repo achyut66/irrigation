@@ -57,7 +57,7 @@ export default function ContactUsPage() {
 
             {/* Google Form Button */}
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSf..." 
+              href="https://forms.gle/wNn7uKoYpbjESTs69" 
               target="_blank"
               className="inline-block mt-5 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition"
             >
