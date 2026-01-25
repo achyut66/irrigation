@@ -12,6 +12,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\LawsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\KaryasamitiController;
 
 use App\Models\HighlightNews;
 use App\Models\NewsAndArticles;
@@ -62,6 +63,14 @@ Route::get('/authority/{id}', [PersonnelController::class, 'show']);
 Route::post('/authority', [PersonnelController::class, 'store'])->middleware('auth:sanctum');
 Route::post('/authority/{id}/update', [PersonnelController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/authority/{id}', [PersonnelController::class, 'destroy'])->middleware('auth:sanctum');
+
+// karyasamiti
+
+Route::get('/karyasamiti', [KaryasamitiController::class, 'index']);
+Route::get('/karyasamiti/{id}', [KaryasamitiController::class, 'show']);
+Route::post('/karyasamiti', [KaryasamitiController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/karyasamiti/{id}/update', [KaryasamitiController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/karyasamiti/{id}', [KaryasamitiController::class, 'destroy'])->middleware('auth:sanctum');
 
 // plan and programm
 
