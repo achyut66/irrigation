@@ -211,7 +211,7 @@ export default function ReportPage() {
       <Sidebar onLogout={() => {}} />
 
       <div className="flex-1 p-8">
-        <h1 className="text-3xl font-bold mb-6">Excel Reports</h1>
+        <h1 className="text-3xl font-bold mb-6">Report</h1>
 
         {/* ---------------- CREATE FORM ---------------- */}
         <form
@@ -230,7 +230,7 @@ export default function ReportPage() {
           />
 
           <label className="block mt-4 mb-2 text-sm font-medium">
-            Upload Excel File
+            Upload Pdf File
           </label>
           <input
             type="file"

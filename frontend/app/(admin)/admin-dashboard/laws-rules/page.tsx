@@ -275,7 +275,7 @@ export default function NewsUpdate() {
             required
           />
 
-          <label className="block mt-4 mb-2 text-sm font-medium">Image</label>
+          <label className="block mt-4 mb-2 text-sm font-medium">Document</label>
           <input type="file" onChange={handleImageChange} />
 
           <button
@@ -388,7 +388,7 @@ export default function NewsUpdate() {
                 rows={4}
               />
 
-              <label className="block mt-4 mb-2">Replace Image</label>
+              <label className="block mt-4 mb-2">Replace File</label>
               <input
                 type="file"
                 onChange={(e: any) =>
