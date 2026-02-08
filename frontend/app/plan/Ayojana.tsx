@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FileText } from "lucide-react";
 
 type PlanItem = {
   id: number;
@@ -63,19 +64,24 @@ export default function NationalProjects() {
 
               {/* Image */}
               <Link href={`/plan/${p.id}`}>
+              {/\.(jpg|jpeg|png|webp|gif)$/i.test(p.image_url) ? (
                 <img
                   src={p.image_url}
                   alt={p.title}
                   className="w-full h-40 object-cover"
                 />
-
-                {/* Title */}
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold hover:text-blue-600 text-gray-600">
-                    {p.title}
-                  </h3>
+              ) : (
+                <div className="flex justify-center items-center h-40 bg-gray-100">
+                  <FileText size={120} color="#ef4444" strokeWidth={1.5} />
                 </div>
-              </Link>
+              )}
+
+              <div className="p-4">
+                <h3 className="text-lg font-semibold hover:text-blue-600 text-gray-600">
+                  {p.title}
+                </h3>
+              </div>
+            </Link>
 
             </div>
           ))}

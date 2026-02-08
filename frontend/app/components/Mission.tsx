@@ -1,7 +1,7 @@
 export default function MissionSection() {
   return (
     <section className="bg-gray-100 py-12">
-      <div className="max-w-8xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10 items-center">
 
           {/* LEFT IMAGE */}
@@ -17,7 +17,7 @@ export default function MissionSection() {
           <div>
             {/* Heading */}
             <h2 className="text-3xl font-bold text-gray-700 mb-8 border-b-4 border-blue-500 inline-block pb-1">
-              हाम्रो उद्देश्य
+              हाम्रो उदेश्य
             </h2>
 
             {/* Mission */}

@@ -15,11 +15,17 @@ export default function Footer() {
           <div>
             <div className="flex gap-3 items-center">   {/* UPDATED */}
               <div className="relative w-28 h-28 flex-shrink-0">  {/* UPDATED SIZE */}
-                <Image
+                {/* <Image
                   src="/images/Nepalg.png"
                   alt="Nepal Emblem"
                   fill
                   className="object-contain"
+                /> */}
+                <img
+                  src="/images/logo.png"
+                  alt="Logo"
+                  color="white"
+                  className="w-28 h-28 object-contain filter invert"
                 />
               </div>
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/navigation";
+import { FileSpreadsheet } from "lucide-react";
 
 type NewsItem = {
   id: number;
@@ -139,6 +140,8 @@ export default function NewsUpdate() {
         headers: authHeaders(csrfToken),
         body: formData,
       });
+
+      // console.log(response);
   
       const payload = await response.json();
   
@@ -276,7 +279,7 @@ export default function NewsUpdate() {
           />
 
           <label className="block mt-4 mb-2 text-sm font-medium">Document</label>
-          <input type="file" onChange={handleImageChange} />
+          <input type="file" onChange={handleImageChange} accept="image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
 
           <button
             type="submit"
@@ -293,6 +296,7 @@ export default function NewsUpdate() {
             <th className="p-3 text-left">#</th>  {/* index column */}
             <th className="p-3 text-left">Laws Title</th>
             <th className="p-3 text-left">Description</th>
+            <th className="p-3 text-left">File</th>
             <th className="p-3">Actions</th>
             </tr>
         </thead>
@@ -306,6 +310,14 @@ export default function NewsUpdate() {
 
                 <td className="p-3">{item.title}</td>
                 <td className="p-3">{item.description}</td>
+                <td className="p-3">  
+                  <FileSpreadsheet/>
+                  {item.image_url ? (
+                    <a href={item.image_url} target="_blank" className="text-blue-600 underline">Download</a>
+                  ) : (
+                    "No File"
+                  )}
+                </td>
 
                 <td className="p-3 flex gap-3">
                 <button

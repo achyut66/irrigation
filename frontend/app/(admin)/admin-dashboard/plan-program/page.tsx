@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/navigation";
+import { FileSpreadsheet } from "lucide-react";
 
 type NewsItem = {
   id: number;
@@ -276,8 +277,8 @@ export default function NewsUpdate() {
             required
           />
           
-          <label className="block mt-4 mb-2 text-sm font-medium">Image</label>
-          <input type="file" onChange={handleImageChange} />
+          <label className="block mt-4 mb-2 text-sm font-medium">Image / Documents</label>
+          <input type="file" onChange={handleImageChange} accept="image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
 
           <button
             type="submit"
@@ -291,7 +292,7 @@ export default function NewsUpdate() {
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-200">
             <tr>
-              <th className="p-3 text-left">Image</th>
+              <th className="p-3 text-left">Image / Documents</th>
               <th className="p-3 text-left">Title</th>
               <th className="p-3 text-left">Description</th>
               <th className="p-3">Actions</th>
@@ -303,10 +304,24 @@ export default function NewsUpdate() {
                 
               <tr key={item.id} className="border-t">
                 <td className="p-3">
-                  {item.image_url ? (
-                    <img src={item.image_url} className="w-20 h-20 object-cover" />
+                  {item.image_url && /\.(jpg|jpeg|png|webp|gif)$/i.test(item.image_url) ? (
+                    <img
+                      src={item.image_url}
+                      className="w-20 h-20 object-cover"
+                      alt="preview"
+                    />
                   ) : (
-                    "No Image"
+                    <>
+                      <FileSpreadsheet className="w-6 h-6 text-gray-500 mb-1" />
+                      <a
+                        href={item.image_url || ""}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline block"
+                      >
+                        Download
+                      </a>
+                    </>
                   )}
                 </td>
 

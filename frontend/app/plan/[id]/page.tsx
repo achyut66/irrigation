@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Footer from "../../components/Footer";
+import { FileText,Download } from "lucide-react";
 
 type Plan = {
   id: number;
@@ -93,17 +94,41 @@ export default function PlanDetails() {
 
   return (
     <>
-    <div className="max-w-7xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 text-gray-600">{plan.title}</h1>
-      {plan.image_url && (
-        <img
-          src={plan.image_url}
-          className="w-full h-64 object-cover mb-4 rounded-lg text-gray-600"
-          alt={plan.title}
-        />
-      )}
-      <p className="text-lg leading-relaxed whitespace-pre-line text-gray-600">{plan.description}</p>
-    </div>
+    
+<div className="max-w-7xl mx-auto p-4">
+  <h1 className="text-3xl font-bold mb-4 text-gray-600">{plan.title}</h1>
+
+  {plan.image_url && (
+    /\.(jpg|jpeg|png|webp|gif)$/i.test(plan.image_url) ? (
+      <img
+        src={plan.image_url}
+        className="w-full h-84 object-cover mb-4 rounded-lg"
+        alt={plan.title}
+      />
+    ) : (
+      <div className="relative flex flex-col items-center justify-center h-64 bg-gray-100 mb-4 rounded-lg">
+        
+        {/* Download button */}
+        <a
+          href={plan.image_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-3 right-3 flex items-center gap-1 bg-white px-3 py-1 rounded shadow text-sm text-blue-600 hover:bg-blue-50"
+        >
+          <Download size={16} />
+          Download File
+        </a>
+
+        {/* Big PDF Icon */}
+        <FileText size={120} color="#ef4444" strokeWidth={1.5} />
+      </div>
+    )
+  )}
+
+  <p className="text-lg leading-relaxed whitespace-pre-line text-gray-600">
+    {plan.description}
+  </p>
+</div>
     <Footer/>
 
     </>
